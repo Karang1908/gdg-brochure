@@ -328,6 +328,16 @@ main{position:relative;width:100%;overflow-x:hidden}
 #contact{padding-top:5rem;padding-inline:var(--gutter);position:relative;overflow:hidden}
 .c-h{margin-top:1.5rem;max-width:18ch;font-family:var(--font-display);line-height:.92;letter-spacing:-0.045em;font-size:3rem;font-weight:800}
 @media (min-width:640px){.c-h{font-size:4.5rem}}
+.c-grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:end}
+@media (min-width:1024px){.c-grid{grid-template-columns:1fr 24rem;gap:var(--gutter)}}
+.c-card{padding:1.75rem;border:1.5px solid var(--line);border-radius:1.25rem;background:var(--surface)}
+.c-dash{display:grid;grid-template-columns:repeat(4,1fr);gap:.35rem;margin-bottom:1.25rem}
+.c-dash i{height:5px;border-radius:5px}
+.c-dash i:nth-child(1){background:var(--blue)}.c-dash i:nth-child(2){background:var(--red)}.c-dash i:nth-child(3){background:var(--yellow)}.c-dash i:nth-child(4){background:var(--green)}
+.c-card dl div{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:.9rem 0;border-bottom:1px solid var(--line)}
+.c-card dl div:last-child{border-bottom:0;padding-bottom:0}
+.c-card dt{font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.c-card dd{font-size:1.0625rem;font-weight:700;text-align:right}
 .c-p{margin-top:1.25rem;max-width:44ch;font-size:1.375rem;line-height:1.45;color:var(--muted)}
 .email{margin-top:2rem;display:inline-flex;align-items:baseline;gap:.75rem;font-size:1.75rem;line-height:1.15;font-weight:700;letter-spacing:-0.02em;word-break:break-all;transition:transform 340ms ease-out,color 340ms ease-out}
 .email:hover{transform:translateX(14px);color:var(--yellow)}
@@ -511,10 +521,23 @@ main{position:relative;width:100%;overflow-x:hidden}
 
   <!-- CONTACT (p.10, dark) -->
   <footer id="contact" class="dark">
-    <p class="eyebrow">GDG On Campus BITS Pilani, Dubai Campus</p>
-    <h2 class="c-h" data-lines>Partner with GDG Hackathon ’26.</h2>
-    <p class="c-p fade-up io">Contact the organizing team to discuss your sponsorship.</p>
-    <a class="email" href="mailto:gdsc@dubai.bits-pilani.ac.in">gdsc@dubai.bits-pilani.ac.in <span class="arr">↗</span></a>
+    <div class="c-grid">
+      <div>
+        <p class="eyebrow">GDG On Campus BITS Pilani, Dubai Campus</p>
+        <h2 class="c-h" data-lines>Partner with GDG Hackathon ’26.</h2>
+        <p class="c-p fade-up io">Contact the organizing team to discuss your sponsorship.</p>
+        <a class="email" href="mailto:gdsc@dubai.bits-pilani.ac.in">gdsc@dubai.bits-pilani.ac.in <span class="arr">↗</span></a>
+      </div>
+      <aside class="c-card fade-up io" style="--dl:150ms;--y:30px" aria-label="Event details">
+        <span class="c-dash" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <dl>
+          <div><dt>When</dt><dd>2–3 Nov 2026</dd></div>
+          <div><dt>Format</dt><dd>24-hour hackathon</dd></div>
+          <div><dt>Where</dt><dd>BITS Pilani, Dubai Campus</dd></div>
+          <div><dt>Tiers</dt><dd>Gold · Silver · Bronze</dd></div>
+        </dl>
+      </aside>
+    </div>
     <div class="fbar">
       <div>
         <p class="f-sig"><img class="gdg-mark" src="assets/gdg-mark.png" alt="" width="369" height="226">GDG Hackathon ’26</p>
