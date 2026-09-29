@@ -251,8 +251,9 @@ main{position:relative;width:100%;overflow-x:hidden}
 .benefits b{font-size:.75rem;letter-spacing:.14em;padding-top:.3rem;color:var(--muted)}
 .benefits h4{font-size:1.0625rem;font-weight:700;letter-spacing:-0.01em}
 .benefits p{margin-top:.2rem;font-size:.9375rem;line-height:1.45;color:var(--muted)}
-.feat-note{margin-top:1.25rem;padding:.25rem 0 .25rem 1rem;border-left:4px solid var(--fc,var(--yellow));font-weight:700;font-size:1.0625rem;color:var(--foreground)}
-.feat-note em{font-style:normal;color:var(--muted);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:.25rem}
+.feat-note{margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--line);font-weight:700;font-size:1.0625rem;color:var(--foreground)}
+.feat-note em{font-style:normal;color:var(--muted);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem;margin-bottom:.35rem}
+.feat-note em::before{content:"";width:.5rem;height:.5rem;border-radius:9999px;background:var(--fc,var(--yellow))}
 .feat-pack{display:flex;flex-wrap:wrap;gap:.5rem}
 .feat-pack span{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .75rem .35rem .35rem;background:var(--paper);border:1.5px solid var(--line-strong);border-radius:.6rem;font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--foreground)}
 .feat-pack i{display:grid;place-items:center;min-width:1.6rem;height:1.6rem;border-radius:.35rem;background:var(--foreground);color:var(--paper);font-style:normal;font-size:.9375rem;letter-spacing:0}
