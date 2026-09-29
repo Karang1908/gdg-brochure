@@ -259,8 +259,9 @@ main{position:relative;width:100%;overflow-x:hidden}
 .feat-pack i{display:grid;place-items:center;min-width:1.6rem;height:1.6rem;border-radius:.35rem;background:var(--foreground);color:var(--paper);font-style:normal;font-size:.9375rem;letter-spacing:0}
 .vp-wrap{opacity:0;transform:scale(1.06);transition:opacity 640ms var(--expo),transform 640ms var(--expo)}
 .vp-wrap.revealed{opacity:1;transform:none}
-.vp{aspect-ratio:3/4;width:100%;border-radius:1rem;border:2px solid var(--line-strong)}
-@media (max-width:767px){.vp{aspect-ratio:16/9}}
+.tier-art{aspect-ratio:3/4;width:100%;border-radius:1rem;border:2px solid #1F1F1F;display:grid;place-items:center;padding:1rem;transition:background-color 500ms ease-out;overflow:hidden}
+.tier-art svg{width:100%;height:100%;animation:wordIn 520ms var(--quart) both}
+@media (max-width:767px){.tier-art{aspect-ratio:16/9}}
 
 /* glance */
 .stats{margin-top:4rem;display:grid;grid-template-columns:1fr;border-top:1px solid var(--line)}
@@ -601,7 +602,7 @@ shots.forEach(([src,n,b,t,c],i)=>{
 
 /* tier detail */
 const tiers = [
-  { name:"Gold", price:"AED 5,000", c:"#FBBC05", img:"assets/photo-03.jpg",
+  { name:"Gold", price:"AED 5,000", c:"#FBBC05",
     line:"Own the event.",
     pack:[["4","Stories"],["2","Reels"],["1","Post"]],
     items:[["Your problem statement","Give your problem statement for the hackathon."],
@@ -610,7 +611,7 @@ const tiers = [
            ["Full brand package","Logo on all posters, banners and merch, plus social and partner promotion."],
            ["Video, emails & prizes","Promo video at the event, participant emails, and optional prizes."]],
     note:["Title sponsor recognition","“GDG Hackathon ’26 powered by [Company Name]”"] },
-  { name:"Silver", price:"AED 3,000", c:"#4285F4", img:"assets/photo-01.jpg",
+  { name:"Silver", price:"AED 3,000", c:"#4285F4",
     line:"Be seen everywhere.",
     pack:[["2","Stories"],["1","Reel"],["1","Post"]],
     items:[["Logo visibility","Logo on posters and banners, plus social media mentions."],
@@ -618,7 +619,7 @@ const tiers = [
            ["Branded distribution","Distribute branded vouchers or merchandise."],
            ["Silver Sponsor acknowledgment","Recognition in event promotions."]],
     note:["Title sponsor recognition","To be confirmed"] },
-  { name:"Bronze", price:"AED 1,500", c:"#34A853", img:"assets/photo-02.jpg",
+  { name:"Bronze", price:"AED 1,500", c:"#34A853",
     line:"Get on the board.",
     pack:[["1","Story"],["1","Post"]],
     items:[["Logo presence","Logo displayed on event banners and digital posters."],
@@ -626,22 +627,34 @@ const tiers = [
            ["Event acknowledgment","Recognition during the event."]],
     note:["Plus","Every shared benefit: session, mentorship / judging, homepage logo"] }
 ];
-tiers.forEach(t => new Image().src = t.img);
 const vsel = document.getElementById("vsel"), quote = document.getElementById("quote"), feat = document.getElementById("feat");
-const vfig = liquidFig(tiers[0].img, tiers[0].name, "vp", 22);
-document.getElementById("vp-wrap").appendChild(vfig);
+const K = 'stroke="#1F1F1F" stroke-width="2.5"';
+const globe = (x,y,r,fill) => `<g ${K} fill="none"><circle cx="${x}" cy="${y}" r="${r}" fill="${fill}"/><ellipse cx="${x}" cy="${y}" rx="${r*.4}" ry="${r}"/><path d="M${x-r} ${y}h${2*r}M${x-r*.9} ${y-r*.45}h${1.8*r}M${x-r*.9} ${y+r*.45}h${1.8*r}"/></g>`;
+const brace = (x,y,fill) => `<path transform="translate(${x} ${y})" d="M34 4H24c-6 0-9 3-9 9v27c0 7-4 11-11 12v6c7 1 11 5 11 12v27c0 6 3 9 9 9h10v-12h-6c-2 0-3-1-3-3V72c0-8-3-13-9-15 6-2 9-7 9-15V19c0-2 1-3 3-3h6z" fill="${fill}" ${K} stroke-linejoin="round"/>`;
+const dot = (x,y,f) => `<circle cx="${x}" cy="${y}" r="17" fill="${f}" ${K}/>`;
+const arches = (x,y) => `<path transform="translate(${x} ${y})" d="M0 40V20a18 18 0 0 1 36 0v20M36 40V20a18 18 0 0 1 36 0v20M72 40V20a18 18 0 0 1 36 0v20" fill="none" ${K}/>`;
+const dots = (x,y) => { let o=""; for(let i=0;i<5;i++) for(let j=0;j<6;j++) o+=`<circle cx="${x+i*9}" cy="${y+j*9}" r="1.6" fill="#fff"/>`; return o; };
+const ART = [
+  globe(80,70,48,"#FBBC05") + brace(22,132,"#34A853") + dot(100,160,"#EA4335") + dot(100,205,"#4285F4") + dots(128,140),
+  brace(20,20,"#FBBC05") + globe(100,120,42,"#F0F0F0") + dot(40,200,"#EA4335") + dot(82,200,"#34A853") + dots(120,190),
+  brace(20,24,"#FBBC05") + dot(90,50,"#EA4335") + dot(132,50,"#4285F4") + arches(28,176) + dots(118,110)
+];
+const art = document.createElement("div");
+art.className = "tier-art"; art.setAttribute("role","img");
+document.getElementById("vp-wrap").appendChild(art);
 let active = -1, quoteSeen = false;
 function setTier(i){
   if (i === active) return; active = i;
   [...vsel.querySelectorAll("button")].forEach((b,j)=> b.classList.toggle("active", j===i));
   const t = tiers[i];
-  feat.style.setProperty("--fc", t.c); vfig.style.setProperty("--c", t.c);
+  feat.style.setProperty("--fc", t.c);
   document.getElementById("feat-label").textContent = `${t.name} tier · ${t.price}`;
   quote.innerHTML = t.line.split(" ").map((w,k)=>`<span class="w" style="--dl:${k*22}ms">${w}</span>`).join(" ");
   document.getElementById("feat-pack").innerHTML = t.pack.map(([n,l])=>`<span><i>${n}</i>${l}</span>`).join("");
   document.getElementById("benefit-list").innerHTML = t.items.map(([h,p],k)=>`<li style="--dl:${120 + k*60}ms"><b>0${k+1}</b><div><h4>${h}</h4><p>${p}</p></div></li>`).join("");
   document.getElementById("feat-note").innerHTML = `<em>${t.note[0]}</em>${t.note[1]}`;
-  vfig.querySelector(".media").src = t.img; vfig.setAttribute("aria-label", t.name + " tier");
+  art.style.background = t.c; art.setAttribute("aria-label", t.name + " tier illustration");
+  art.innerHTML = `<svg viewBox="0 0 176 234">${ART[i]}</svg>`;
   if (quoteSeen) { quote.classList.remove("play"); void quote.offsetWidth; quote.classList.add("play"); }
 }
 tiers.forEach((t,i)=>{
