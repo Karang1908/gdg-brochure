@@ -61,8 +61,8 @@ body,.site-header,.marquee,.mobile-menu{transition:background-color .4s ease,col
 @media (min-width:768px){.nav-right{gap:2.5rem}}
 /* hero background: slow aurora glows under an interactive dot grid */
 .aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;opacity:var(--aurora-o,.28)}
-:root[data-theme="dark"] .aurora{--aurora-o:.14;mix-blend-mode:screen}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .aurora{--aurora-o:.14;mix-blend-mode:screen}}
+:root[data-theme="dark"] .aurora{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .aurora{display:none}}
 .aurora i{position:absolute;width:44vw;aspect-ratio:1;border-radius:50%;filter:blur(90px);opacity:.5;animation:drift 26s ease-in-out infinite alternate}
 .aurora i:nth-child(1){background:var(--blue);left:-10vw;top:-12vw}
 .aurora i:nth-child(2){background:var(--red);right:-8vw;top:-6vw;width:34vw;animation-duration:31s;animation-delay:-6s}
