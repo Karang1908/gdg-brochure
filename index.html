@@ -75,13 +75,13 @@ body,.site-header,.marquee,.mobile-menu{transition:background-color .4s ease,col
 .pl-brand{display:flex;align-items:center;gap:1rem;font-family:var(--font-display);font-size:1.75rem;font-weight:700;line-height:1;letter-spacing:-0.02em}
 .pl-brand{flex-direction:column;align-items:flex-start;gap:.5rem}
 .pl-brand small{font-family:var(--font-sans);font-size:.8125rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#9AA0A6}
-.pl-center{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:1.75rem;width:min(24rem,80vw)}
+.pl-center{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:1.5rem;width:min(30rem,84vw)}
 .pl-logo{width:9rem;overflow:visible;animation:breathe 2.4s ease-in-out 1s infinite}
 .pp{animation:ppIn 900ms var(--expo) both;animation-delay:var(--d)}
 @keyframes ppIn{from{transform:translate(var(--x),var(--y)) scale(.4);opacity:0}}
 @keyframes breathe{50%{transform:scale(1.06)}}
 .pl-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;width:100%}
-.pl-bar i{height:4px;border-radius:4px;background:rgba(240,240,240,.12);position:relative;overflow:hidden}
+.pl-bar i{height:6px;border-radius:4px;background:rgba(240,240,240,.12);position:relative;overflow:hidden}
 .pl-bar i::after{content:"";position:absolute;inset:0;background:var(--c);transform-origin:left;transform:scaleX(var(--f,0))}
 .pl-bar i:nth-child(1){--c:var(--blue)}.pl-bar i:nth-child(2){--c:var(--red)}.pl-bar i:nth-child(3){--c:var(--yellow)}.pl-bar i:nth-child(4){--c:var(--green)}
 .pl-status{font-family:"Google Sans Code",ui-monospace,monospace;font-size:.9375rem;color:#9AA0A6;white-space:nowrap;min-height:1.4em}
@@ -239,9 +239,11 @@ main{position:relative;width:100%;overflow-x:hidden}
 /* included (dark) */
 .inc-grid{margin-top:4rem;display:grid;grid-template-columns:1fr;gap:3rem}
 @media (min-width:768px){.inc-grid{grid-template-columns:repeat(3,1fr);gap:var(--gutter)}}
-.inc{--d:560ms;--y:40px}
-.inc .p-num{width:5rem;height:5rem;font-size:1.75rem;border-color:var(--paper);color:var(--ink)}
-.inc h3{margin-top:2rem;font-size:1.75rem;font-weight:700;letter-spacing:-0.02em}
+.inc{--d:560ms;--y:40px;padding:2rem;border:1.5px solid var(--line);border-radius:1.25rem;background:var(--surface);transition:border-color .35s,transform .45s var(--expo)}
+.inc:nth-child(1){--c:var(--blue)}.inc:nth-child(2){--c:var(--yellow)}.inc:nth-child(3){--c:var(--green)}
+.inc:hover{border-color:var(--c)}
+.inc .p-num{width:4rem;height:4rem;font-size:1.75rem;border-color:var(--paper);color:var(--ink)}
+.inc h3{margin-top:1.5rem;font-size:1.75rem;font-weight:700;letter-spacing:-0.02em}
 .inc p{margin-top:1rem;max-width:32ch;font-size:1.1875rem;line-height:1.55;color:var(--muted)}
 .arches{margin-top:4rem;display:flex;justify-content:space-between;align-items:flex-end}
 .arches svg{width:18rem;color:var(--paper)}
@@ -260,30 +262,35 @@ main{position:relative;width:100%;overflow-x:hidden}
 .vsel button.active .vs-idx{background:var(--c);border-color:#1F1F1F;color:#1F1F1F}
 .vsel button.active .vs-name{color:var(--foreground)}
 @media (max-width:640px){.vsel button{flex-direction:column;align-items:flex-start;gap:.5rem;padding:.75rem}.vs-name{font-size:1.25rem}.vs-role{display:none}}
-.feat{margin-top:1.25rem;display:grid;grid-template-columns:1fr;gap:2rem;border-radius:1.25rem;border:2px solid var(--fc,var(--yellow));padding:2rem;background:color-mix(in srgb,var(--fc,var(--yellow)) 14%,var(--paper));transition:background-color 500ms ease-out,border-color 500ms ease-out}
+.feat{margin-top:1.25rem;display:grid;grid-template-columns:1fr;gap:2rem;border-radius:1.25rem;border:2px solid var(--fc,var(--yellow));padding:2rem;background-color:color-mix(in srgb,var(--fc,var(--yellow)) 12%,var(--paper));background-image:radial-gradient(color-mix(in srgb,var(--fc,var(--yellow)) 35%,transparent) 1px,transparent 1.5px);background-size:18px 18px;transition:background-color 500ms ease-out,border-color 500ms ease-out}
 .feat-main{order:2}.feat-side{order:1}
-.feat-price{font-size:3rem;font-weight:800;line-height:1;letter-spacing:-0.04em;color:var(--foreground)}
+.feat-price{font-size:3rem;font-weight:800;line-height:1;letter-spacing:-0.04em;color:var(--fct,var(--foreground));padding-bottom:.75rem;background:linear-gradient(90deg,var(--blue) 0 25%,var(--red) 25% 50%,var(--yellow) 50% 75%,var(--green) 75%) bottom left/3.5rem 4px no-repeat}
+.feat-side .label{margin-bottom:.75rem}
 .feat-side .feat-pack{margin-top:1.25rem;flex-direction:column;align-items:flex-start}
 @media (max-width:767px){.feat-side .feat-pack{flex-direction:row}}
 @media (min-width:768px){.feat{grid-template-columns:13rem 1fr;align-items:start;gap:2.5rem}.vp-wrap{order:1}.feat-main{order:2}}
 .feat .label{color:var(--muted)}
 .feat-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem}
-.quote{margin-top:.5rem;font-size:2rem;font-weight:800;line-height:1.1;letter-spacing:-0.03em;color:var(--foreground)}
+.quote{margin-top:.25rem;font-size:2.25rem;font-weight:800;line-height:1.1;letter-spacing:-0.03em;color:var(--foreground)}
 .quote .w{display:inline-block;opacity:0;transform:translateY(18px)}
 .quote.play .w{animation:wordIn 520ms var(--quart) forwards;animation-delay:var(--dl)}
 @keyframes wordIn{to{opacity:1;transform:none}}
-.benefits{margin-top:1.5rem;display:grid;grid-template-columns:1fr;column-gap:2rem;border-top:1px solid var(--line)}
+.benefits{margin-top:1.5rem;display:grid;grid-template-columns:1fr;gap:.75rem}
 @media (min-width:1024px){.benefits{grid-template-columns:1fr 1fr}}
-.benefits li{display:grid;grid-template-columns:2.25rem 1fr;padding:.9rem 0;border-bottom:1px solid var(--line);opacity:0;transform:translateY(12px);animation:wordIn 480ms var(--quart) forwards;animation-delay:var(--dl)}
-.benefits b{font-size:.75rem;letter-spacing:.14em;padding-top:.3rem;color:var(--muted)}
-.benefits h4{font-size:1.0625rem;font-weight:700;letter-spacing:-0.01em}
+.benefits li{display:flex;gap:1rem;align-items:flex-start;padding:1rem 1.1rem;border:1.5px solid var(--line);border-radius:.9rem;background:var(--paper);opacity:0;transform:translateY(12px);animation:wordIn 480ms var(--quart) forwards;animation-delay:var(--dl);transition:border-color .3s,box-shadow .3s}
+.benefits li:hover{border-color:var(--fc);box-shadow:0 .5rem 1.5rem -.75rem color-mix(in srgb,var(--fc) 60%,transparent)}
+.b-ico{flex-shrink:0;display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:.7rem;background:var(--ic);border:1.5px solid #1F1F1F;color:#1F1F1F;transition:transform .45s var(--expo)}
+.benefits li:hover .b-ico{transform:rotate(-8deg) scale(1.06)}
+.b-ico svg{width:1.3rem;height:1.3rem}
+.benefits h4{font-size:1.0625rem;font-weight:700;letter-spacing:-0.01em;padding-top:.1rem}
 .benefits p{margin-top:.2rem;font-size:.9375rem;line-height:1.45;color:var(--muted)}
 .feat-note{margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--line);font-weight:700;font-size:1.0625rem;color:var(--foreground)}
 .feat-note em{font-style:normal;color:var(--muted);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem;margin-bottom:.35rem}
 .feat-note em::before{content:"";width:.5rem;height:.5rem;border-radius:9999px;background:var(--fc,var(--yellow))}
 .feat-pack{display:flex;flex-wrap:wrap;gap:.5rem}
 .feat-pack span{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .75rem .35rem .35rem;background:var(--paper);border:1.5px solid var(--line-strong);border-radius:.6rem;font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--foreground)}
-.feat-pack i{display:grid;place-items:center;min-width:1.6rem;height:1.6rem;border-radius:.35rem;background:var(--foreground);color:var(--paper);font-style:normal;font-size:.9375rem;letter-spacing:0}
+.feat-pack span:nth-child(1) i{background:var(--blue)}.feat-pack span:nth-child(2) i{background:var(--red)}.feat-pack span:nth-child(3) i{background:var(--green)}
+.feat-pack i{display:grid;place-items:center;min-width:1.6rem;height:1.6rem;border-radius:.35rem;border:1.5px solid #1F1F1F;color:#1F1F1F;font-style:normal;font-size:.9375rem;letter-spacing:0}
 .vp-wrap{opacity:0;transform:scale(1.06);transition:opacity 640ms var(--expo),transform 640ms var(--expo)}
 .vp-wrap.revealed{opacity:1;transform:none}
 
@@ -357,14 +364,6 @@ main{position:relative;width:100%;overflow-x:hidden}
 <div class="pl-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 <div id="preloader">
   <div class="pl-center pl-label">
-    <svg class="pl-logo" viewBox="0 0 200 120" aria-hidden="true">
-      <g stroke="#1F1F1F" stroke-width="4">
-        <g class="pp" style="--x:-60px;--y:-50px;--d:0ms"><rect x="15" y="29" width="72" height="28" rx="14" fill="#EA4335" transform="rotate(35 51 43)"/></g>
-        <g class="pp" style="--x:-60px;--y:50px;--d:120ms"><rect x="15" y="63" width="72" height="28" rx="14" fill="#4285F4" transform="rotate(-35 51 77)"/></g>
-        <g class="pp" style="--x:60px;--y:-50px;--d:240ms"><rect x="113" y="29" width="72" height="28" rx="14" fill="#34A853" transform="rotate(-35 149 43)"/></g>
-        <g class="pp" style="--x:60px;--y:50px;--d:360ms"><rect x="113" y="63" width="72" height="28" rx="14" fill="#FBBC05" transform="rotate(35 149 77)"/></g>
-      </g>
-    </svg>
     <div class="pl-bar" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <p class="pl-status" id="pl-status">&gt; booting dev environment<span class="caret"></span></p>
   </div>
@@ -488,23 +487,17 @@ main{position:relative;width:100%;overflow-x:hidden}
       <ul class="vsel" id="vsel"></ul>
       <div class="feat" id="feat">
         <div class="feat-main">
-          <p class="label" id="feat-label"></p>
           <p class="quote" id="quote"></p>
           <ul class="benefits" id="benefit-list"></ul>
           <p class="feat-note" id="feat-note"></p>
         </div>
-        <div class="feat-side"><p class="feat-price" id="feat-price"></p><div class="feat-pack" id="feat-pack"></div></div>
+        <div class="feat-side"><p class="label" id="feat-label"></p><p class="feat-price" id="feat-price"></p><div class="feat-pack" id="feat-pack"></div></div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT (p.10, dark) -->
   <footer id="contact" class="dark">
-    <svg class="c-deco" viewBox="0 0 200 236" aria-hidden="true">
-      <g fill="none" stroke="#F0F0F0" stroke-width="2"><circle cx="120" cy="60" r="56"/><ellipse cx="120" cy="60" rx="24" ry="56"/><path d="M64 60h112M70 38h100M70 82h100"/></g>
-      <path d="M52 132H40c-7 0-10 3-10 10v24c0 7-4 11-12 12v6c8 1 12 5 12 12v24c0 7 3 10 10 10h12v-12h-6c-2 0-3-1-3-3v-22c0-8-3-13-9-15 6-2 9-7 9-15v-20c0-2 1-3 3-3h6z" fill="#4285F4"/>
-      <circle cx="105" cy="150" r="17" fill="#FBBC05"/><circle cx="155" cy="150" r="17" fill="#EA4335"/><circle cx="105" cy="196" r="17" fill="#34A853"/><circle cx="155" cy="196" r="17" fill="#FBBC05"/>
-    </svg>
     <p class="eyebrow">GDG On Campus BITS Pilani, Dubai Campus</p>
     <h2 class="c-h" data-lines>Partner with GDG Hackathon ’26.</h2>
     <p class="c-p fade-up io">Contact the organizing team to discuss your sponsorship.</p>
@@ -650,42 +643,56 @@ shots.forEach(([src,n,b,t,c],i)=>{
 
 /* tier detail */
 const tiers = [
-  { name:"Gold", price:"AED 5,000", c:"#FBBC05",
+  { name:"Gold", price:"AED 5,000", c:"#FBBC05", ct:"var(--yellow-t)",
     line:"Own the event.",
     pack:[["4","Stories"],["2","Reels"],["1","Post"]],
-    items:[["Your problem statement","Give your problem statement for the hackathon."],
-           ["Dedicated booth / stall","Host a dedicated booth or stall at the event venue."],
-           ["Guest talk","A guest talk on top of the shared session slot."],
-           ["Full brand package","Logo on all posters, banners and merch, plus social and partner promotion."],
-           ["Video, emails & prizes","Promo video at the event, participant emails, and optional prizes."]],
+    items:[["bulb","Your problem statement","Give your problem statement for the hackathon."],
+           ["booth","Dedicated booth / stall","Host a dedicated booth or stall at the event venue."],
+           ["mic","Guest talk","A guest talk on top of the shared session slot."],
+           ["flag","Full brand package","Logo on all posters, banners and merch, plus social and partner promotion."],
+           ["play","Video, emails & prizes","Promo video at the event, participant emails, and optional prizes."]],
     note:["Title sponsor recognition","“GDG Hackathon ’26 powered by [Company Name]”"] },
-  { name:"Silver", price:"AED 3,000", c:"#4285F4",
+  { name:"Silver", price:"AED 3,000", c:"#4285F4", ct:"var(--blue-t)",
     line:"Be seen everywhere.",
     pack:[["2","Stories"],["1","Reel"],["1","Post"]],
-    items:[["Logo visibility","Logo on posters and banners, plus social media mentions."],
-           ["Ceremony recognition","Mentions at the opening and closing ceremonies."],
-           ["Branded distribution","Distribute branded vouchers or merchandise."],
-           ["Silver Sponsor acknowledgment","Recognition in event promotions."]],
+    items:[["eye","Logo visibility","Logo on posters and banners, plus social media mentions."],
+           ["trophy","Ceremony recognition","Mentions at the opening and closing ceremonies."],
+           ["gift","Branded distribution","Distribute branded vouchers or merchandise."],
+           ["star","Silver Sponsor acknowledgment","Recognition in event promotions."]],
     note:["Title sponsor recognition","To be confirmed"] },
-  { name:"Bronze", price:"AED 1,500", c:"#34A853",
+  { name:"Bronze", price:"AED 1,500", c:"#34A853", ct:"var(--green-t)",
     line:"Get on the board.",
     pack:[["1","Story"],["1","Post"]],
-    items:[["Logo presence","Logo displayed on event banners and digital posters."],
-           ["Social recognition","Mention on GDG BPDC’s Instagram story and LinkedIn post."],
-           ["Event acknowledgment","Recognition during the event."]],
+    items:[["image","Logo presence","Logo displayed on event banners and digital posters."],
+           ["share","Social recognition","Mention on GDG BPDC’s Instagram story and LinkedIn post."],
+           ["check","Event acknowledgment","Recognition during the event."]],
     note:["Plus","Every shared benefit: session, mentorship / judging, homepage logo"] }
 ];
+const IC = {
+  bulb:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>',
+  booth:'<path d="M3 9l1.5-5h15L21 9M3 9h18M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0M5 12v8h14v-8M10 20v-4h4v4"/>',
+  mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/>',
+  flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+  play:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/>',
+  eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  trophy:'<path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H4a3 3 0 0 0 4 4M16 6h4a3 3 0 0 1-4 4M12 13v4M8 21h8M9 21l1-4h4l1 4"/>',
+  gift:'<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13M12 8S10 3 7.5 4.5 9 8 12 8zM12 8s2-5 4.5-3.5S15 8 12 8z"/>',
+  star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+  image:'<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/>',
+  share:'<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/>',
+  check:'<circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/>'
+};
 const vsel = document.getElementById("vsel"), quote = document.getElementById("quote"), feat = document.getElementById("feat");
 let active = -1, quoteSeen = false;
 function setTier(i){
   if (i === active) return; active = i;
   [...vsel.querySelectorAll("button")].forEach((b,j)=> b.classList.toggle("active", j===i));
   const t = tiers[i];
-  feat.style.setProperty("--fc", t.c);
+  feat.style.setProperty("--fc", t.c); feat.style.setProperty("--fct", t.ct);
   document.getElementById("feat-label").textContent = `${t.name} tier`;
   quote.innerHTML = t.line.split(" ").map((w,k)=>`<span class="w" style="--dl:${k*22}ms">${w}</span>`).join(" ");
   document.getElementById("feat-pack").innerHTML = t.pack.map(([n,l])=>`<span><i>${n}</i>${l}</span>`).join("");
-  document.getElementById("benefit-list").innerHTML = t.items.map(([h,p],k)=>`<li style="--dl:${120 + k*60}ms"><b>0${k+1}</b><div><h4>${h}</h4><p>${p}</p></div></li>`).join("");
+  document.getElementById("benefit-list").innerHTML = t.items.map(([ic,h,p],k)=>`<li style="--dl:${120 + k*60}ms;--ic:${G[k%4]}"><span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${IC[ic]}</svg></span><div><h4>${h}</h4><p>${p}</p></div></li>`).join("");
   document.getElementById("feat-note").innerHTML = `<em>${t.note[0]}</em>${t.note[1]}`;
   document.getElementById("feat-price").textContent = t.price;
   if (quoteSeen) { quote.classList.remove("play"); void quote.offsetWidth; quote.classList.add("play"); }
