@@ -172,10 +172,10 @@ main{position:relative;width:100%;overflow-x:hidden}
 @media (min-width:1024px){.story-grid{grid-template-columns:repeat(12,1fr);gap:var(--gutter)}.story-grid>:first-child,.story-grid>:last-child{grid-column:span 6}.story-grid>:last-child{padding-top:.5rem}}
 
 /* gallery */
-.gallery{margin-top:4rem;display:grid;grid-template-columns:1fr;column-gap:var(--gutter);row-gap:4rem}
+.gallery{margin-top:3rem;display:grid;grid-template-columns:1fr;column-gap:var(--gutter);row-gap:4rem}
 .gallery>li{--d:620ms;--y:60px}
-@media (min-width:768px){.gallery{grid-template-columns:repeat(3,1fr)}.gallery>li:nth-child(2){margin-top:6rem}}
-.g-img{aspect-ratio:3/4;width:100%;border-radius:1.25rem;border:2px solid var(--ink)}
+@media (min-width:768px){.gallery{grid-template-columns:repeat(3,1fr)}}
+.g-img{aspect-ratio:4/3;width:100%;border-radius:1.25rem;border:2px solid var(--ink)}
 .v-row{margin-top:1.5rem;border-top:1px solid var(--line);padding-top:1.25rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1.5rem}
 .v-name{font-size:1.75rem;line-height:1.15;font-weight:700;letter-spacing:-0.02em;transition:color 450ms ease-out}
 .group:hover .v-name{color:var(--c)}
@@ -318,14 +318,14 @@ main{position:relative;width:100%;overflow-x:hidden}
       <span class="logo-text"><b>Google Developer Groups on Campus</b><span>BITS Pilani, Dubai Campus</span></span>
     </a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li><li><a href="#tiers">Tiers</a></li><li><a href="#benefits">Benefits</a></li><li><a href="#glance">Glance</a></li><li><a href="#contact">Contact</a></li>
+      <li><a href="#about">About</a></li><li><a href="#floor">Photos</a></li><li><a href="#included">Included</a></li><li><a href="#tiers">Tiers</a></li><li><a href="#contact">Contact</a></li>
     </ul>
     <button class="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </nav>
 </header>
 <div class="mobile-menu" aria-hidden="true">
   <ul>
-    <li><a href="#about">About</a></li><li><a href="#tiers">Tiers</a></li><li><a href="#benefits">Benefits</a></li><li><a href="#glance">Glance</a></li><li><a href="#contact">Contact</a></li>
+    <li><a href="#about">About</a></li><li><a href="#floor">Photos</a></li><li><a href="#included">Included</a></li><li><a href="#tiers">Tiers</a></li><li><a href="#contact">Contact</a></li>
   </ul>
 </div>
 
@@ -393,33 +393,6 @@ main{position:relative;width:100%;overflow-x:hidden}
     <ul class="gallery" id="gallery"></ul>
   </section>
 
-  <!-- TIERS OVERVIEW (p.3) -->
-  <section id="tiers" class="section" style="padding-top:0">
-    <div class="head-row">
-      <div><p class="eyebrow">Sponsorship Tiers</p><h2 class="sec-h up" style="max-width:14ch" data-lines>Three ways to partner.</h2></div>
-    </div>
-    <div class="tiers">
-      <article class="tier fade-up io" style="--c:var(--yellow);--cd:var(--yellow-t);--dl:0ms">
-        <div class="tier-band">Gold <small>Title</small></div>
-        <div class="tier-body"><p class="tier-price">AED 5,000</p>
-        <p class="tier-desc">Title recognition, your problem statement, and the widest promotional package.</p>
-        <p class="tier-pack">4 stories + 2 reels + 1 post</p></div>
-      </article>
-      <article class="tier fade-up io" style="--c:var(--blue);--cd:var(--blue-t);--dl:120ms">
-        <div class="tier-band">Silver <small>Visibility</small></div>
-        <div class="tier-body"><p class="tier-price">AED 3,000</p>
-        <p class="tier-desc">Event visibility, ceremony mentions, and branded vouchers or merchandise.</p>
-        <p class="tier-pack">2 stories + 1 reel + 1 post</p></div>
-      </article>
-      <article class="tier fade-up io" style="--c:var(--green);--cd:var(--green-t);--dl:240ms">
-        <div class="tier-band">Bronze <small>Presence</small></div>
-        <div class="tier-body"><p class="tier-price">AED 1,500</p>
-        <p class="tier-desc">Logo visibility, social mentions, and acknowledgment during the event.</p>
-        <p class="tier-pack">1 story + 1 post</p></div>
-      </article>
-    </div>
-  </section>
-
   <!-- INCLUDED (p.4, dark) -->
   <section id="included" class="section dark">
     <div class="head-row">
@@ -430,16 +403,12 @@ main{position:relative;width:100%;overflow-x:hidden}
       <div class="inc fade-up io" style="--dl:110ms"><span class="p-num" style="--c:var(--yellow)">02</span><h3>Mentorship / judging</h3><p>Mentor or judge competition rounds and connect directly with talent.</p></div>
       <div class="inc fade-up io" style="--dl:220ms"><span class="p-num" style="--c:var(--green)">03</span><h3>Homepage visibility</h3><p>Your company logo on the event website homepage.</p></div>
     </div>
-    <div class="arches" aria-hidden="true">
-      <svg viewBox="0 0 100 40" style="width:14rem;color:#6a6a6a"><defs><pattern id="dp2" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="currentColor"/></pattern></defs><rect width="100" height="24" fill="url(#dp2)"/></svg>
-      <svg viewBox="0 0 150 50" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 50V26a24 24 0 0 1 48 0v24M50 50V26a24 24 0 0 1 48 0v24M98 50V26a24 24 0 0 1 48 0v24"/></svg>
-    </div>
   </section>
 
   <!-- TIER DETAIL (pp.5–8, interactive) -->
-  <section id="benefits" class="section">
+  <section id="tiers" class="section">
     <div class="head-row">
-      <div><p class="eyebrow">Tier Breakdown</p><h2 class="sec-h up" data-lines>Pick your level.</h2></div>
+      <div><p class="eyebrow">Sponsorship Tiers</p><h2 class="sec-h up" data-lines>Three ways to partner.</h2></div>
       <p class="label">Hover or tap a tier</p>
     </div>
     <div class="voices-grid">
@@ -455,22 +424,6 @@ main{position:relative;width:100%;overflow-x:hidden}
         <div class="vp-wrap io-plain" id="vp-wrap"></div>
       </div>
     </div>
-  </section>
-
-  <!-- GLANCE (pp.6 & 9) -->
-  <section id="glance" class="section" style="padding-top:0">
-    <div class="head-row">
-      <div><p class="eyebrow">Compare Tiers</p><h2 class="sec-h up" data-lines>Marketing at a glance.</h2></div>
-    </div>
-    <table class="table fade-up io" style="--y:40px;--d:620ms">
-      <thead><tr><th>Package</th><th style="--c:var(--yellow)">Gold</th><th style="--c:var(--blue)">Silver</th><th style="--c:var(--green)">Bronze</th></tr></thead>
-      <tbody>
-        <tr><td>Stories</td><td>4</td><td>2</td><td>1</td></tr>
-        <tr><td>Reels</td><td>2</td><td>1</td><td>—</td></tr>
-        <tr><td>Posts</td><td>1</td><td>1</td><td>1</td></tr>
-      </tbody>
-    </table>
-    <p class="glance-note fade-up io">Gold also includes event video, participant emails, and partner-platform promotion.</p>
   </section>
 
   <!-- CONTACT (p.10, dark) -->
