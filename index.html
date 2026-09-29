@@ -43,8 +43,10 @@ body{background:var(--background);color:var(--foreground);font-family:var(--font
 ::selection{background:var(--yellow);color:var(--ink)}
 
 /* dark theme */
-:root[data-theme="dark"]{--paper:#131314;--ink:#E8EAED;--background:#131314;--foreground:#E8EAED;--surface:#1E1F20;--surface-2:#28292A;--muted:#9AA0A6;--line:rgba(232,234,237,0.14);--line-strong:rgba(232,234,237,0.85);--blue-t:#8AB4F8;--red-t:#F28B82;--yellow-t:#FDD663;--green-t:#81C995}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#131314;--ink:#E8EAED;--background:#131314;--foreground:#E8EAED;--surface:#1E1F20;--surface-2:#28292A;--muted:#9AA0A6;--line:rgba(232,234,237,0.14);--line-strong:rgba(232,234,237,0.85);--blue-t:#8AB4F8;--red-t:#F28B82;--yellow-t:#FDD663;--green-t:#81C995}}
+:root[data-theme="dark"]{--paper:#0B0B0D;--ink:#F1F3F4;--background:#0B0B0D;--foreground:#F1F3F4;--surface:#16171A;--surface-2:#202124;--muted:#A0A5AB;--line:rgba(241,243,244,0.12);--line-strong:rgba(241,243,244,0.8);--blue-t:#4C8DF6;--red-t:#F05545;--yellow-t:#FBBC05;--green-t:#3DBE63}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0B0B0D;--ink:#F1F3F4;--background:#0B0B0D;--foreground:#F1F3F4;--surface:#16171A;--surface-2:#202124;--muted:#A0A5AB;--line:rgba(241,243,244,0.12);--line-strong:rgba(241,243,244,0.8);--blue-t:#4C8DF6;--red-t:#F05545;--yellow-t:#FBBC05;--green-t:#3DBE63}}
+:root[data-theme="dark"] .dark{--background:#17181B;--surface:#202125;border-top:1px solid rgba(241,243,244,.08);box-shadow:inset 0 3px 0 0 transparent}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dark{--background:#17181B;--surface:#202125;border-top:1px solid rgba(241,243,244,.08)}}
 /* brand-coloured fills always keep dark text on light */
 .hero-meta,.p-num,.hero-roles .line:nth-child(3) .in{--ink:#1F1F1F;--paper:#F0F0F0;--muted:#3C4043;--line:rgba(31,31,31,0.14)}
 .inc .p-num{border-color:#F0F0F0}
@@ -59,8 +61,8 @@ body,.site-header,.marquee,.mobile-menu{transition:background-color .4s ease,col
 @media (min-width:768px){.nav-right{gap:2.5rem}}
 /* hero background: slow aurora glows under an interactive dot grid */
 .aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;opacity:var(--aurora-o,.28)}
-:root[data-theme="dark"] .aurora{--aurora-o:.2}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .aurora{--aurora-o:.2}}
+:root[data-theme="dark"] .aurora{--aurora-o:.14;mix-blend-mode:screen}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .aurora{--aurora-o:.14;mix-blend-mode:screen}}
 .aurora i{position:absolute;width:44vw;aspect-ratio:1;border-radius:50%;filter:blur(90px);opacity:.5;animation:drift 26s ease-in-out infinite alternate}
 .aurora i:nth-child(1){background:var(--blue);left:-10vw;top:-12vw}
 .aurora i:nth-child(2){background:var(--red);right:-8vw;top:-6vw;width:34vw;animation-duration:31s;animation-delay:-6s}
@@ -136,7 +138,7 @@ main{z-index:1}
 .mobile-menu.open a{transform:none;opacity:1}
 @media (min-width:768px){.mobile-menu{display:none}}
 
-main{position:relative;width:100%;overflow-x:hidden}
+main{position:relative;width:100%;overflow-x:clip}
 
 /* reveal primitives */
 .line{display:block;overflow:hidden;padding-bottom:.06em}
@@ -259,6 +261,29 @@ main{position:relative;width:100%;overflow-x:hidden}
 .arches{margin-top:4rem;display:flex;justify-content:space-between;align-items:flex-end}
 .arches svg{width:18rem;color:var(--paper)}
 
+/* tier slabs (brochure pp.5-8) */
+.slab{--ink-s:#1F1F1F;position:relative;background:var(--c);color:var(--ink-s);padding:5rem var(--gutter);border-top:2px solid var(--ink-s);overflow:hidden}
+.slab:last-child{border-bottom:2px solid var(--ink-s)}
+.slab-grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:start}
+@media (min-width:1024px){.slab-grid{grid-template-columns:5fr 7fr;gap:var(--gutter)}}
+@media (min-width:1024px) and (min-height:780px){.slab{position:sticky;top:0;min-height:100svh;display:flex;flex-direction:column;justify-content:center}.slab:nth-child(2){top:1.25rem}.slab:nth-child(3){top:2.5rem}}
+.slab-k{font-size:.8125rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase}
+.slab-name{margin-top:1rem;font-size:5.5rem;font-weight:800;line-height:.9;letter-spacing:-0.05em}
+@media (min-width:640px){.slab-name{font-size:8rem}}
+.slab-price{margin-top:1.25rem;font-size:3rem;font-weight:800;line-height:1;letter-spacing:-0.04em}
+.slab-pack{margin-top:2rem;padding-top:1.5rem;border-top:2px solid var(--ink-s);display:flex;flex-wrap:wrap;gap:.6rem}
+.slab-pack span{display:inline-flex;align-items:center;gap:.55rem;padding:.4rem .9rem .4rem .4rem;border:2px solid var(--ink-s);border-radius:9999px;background:rgba(255,255,255,.35);font-weight:700;font-size:.875rem;text-transform:uppercase;letter-spacing:.1em}
+.slab-pack i{display:grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--ink-s);color:#F0F0F0;font-style:normal;font-size:1rem;letter-spacing:0}
+.slab-card{background:#F4F4F2;color:var(--ink-s);border:2px solid var(--ink-s);border-radius:1.25rem;padding:.5rem 2rem;box-shadow:.5rem .5rem 0 0 var(--ink-s)}
+.slab-card li{display:grid;grid-template-columns:3rem 1fr;align-items:start;padding:1.25rem 0;border-bottom:1.5px solid rgba(31,31,31,.14)}
+.slab-card li:last-child{border-bottom:0}
+.slab-card b{font-size:.8125rem;font-weight:800;letter-spacing:.14em;padding-top:.35rem}
+.slab-card h4{font-size:1.3125rem;font-weight:800;letter-spacing:-0.02em}
+.slab-card p{margin-top:.3rem;font-size:1rem;line-height:1.5;color:#3C4043}
+.slab-note{margin-top:1.25rem;padding:1.1rem 1.5rem;border-radius:.9rem;border:2px solid var(--ink-s);background:var(--ink-s);color:#F4F4F2;font-weight:700;font-size:1.125rem}
+.slab-note em{display:block;margin-bottom:.35rem;font-style:normal;font-size:.75rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--nc)}
+.slab-art{position:absolute;right:-3rem;bottom:-3rem;width:16rem;opacity:.9;pointer-events:none}
+@media (max-width:1023px){.slab-art{display:none}}
 /* tier detail (interactive) — tabs on top, horizontal panel */
 .voices-grid{margin-top:3rem;display:block}
 .vsel{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
@@ -501,23 +526,13 @@ main{position:relative;width:100%;overflow-x:hidden}
   </section>
 
   <!-- TIER DETAIL (pp.5–8, interactive) -->
-  <section id="tiers" class="section">
+  <section id="tiers" class="section" style="padding-bottom:3rem">
     <div class="head-row">
       <div><p class="eyebrow">Sponsorship Tiers</p><h2 class="sec-h up" data-lines>Three ways to partner.</h2></div>
-      <p class="label">Hover or tap a tier</p>
-    </div>
-    <div class="voices-grid">
-      <ul class="vsel" id="vsel"></ul>
-      <div class="feat" id="feat">
-        <div class="feat-main">
-          <p class="quote" id="quote"></p>
-          <ul class="benefits" id="benefit-list"></ul>
-          <p class="feat-note" id="feat-note"></p>
-        </div>
-        <div class="feat-side"><p class="label" id="feat-label"></p><p class="feat-price" id="feat-price"></p><div class="feat-pack" id="feat-pack"></div></div>
-      </div>
+      <p class="label">Gold · Silver · Bronze</p>
     </div>
   </section>
+  <div class="slabs" id="slabs"></div>
 
   <!-- CONTACT (p.10, dark) -->
   <footer id="contact" class="dark">
@@ -718,28 +733,25 @@ const IC = {
   share:'<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/>',
   check:'<circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/>'
 };
-const vsel = document.getElementById("vsel"), quote = document.getElementById("quote"), feat = document.getElementById("feat");
-let active = -1, quoteSeen = false;
-function setTier(i){
-  if (i === active) return; active = i;
-  [...vsel.querySelectorAll("button")].forEach((b,j)=> b.classList.toggle("active", j===i));
-  const t = tiers[i];
-  feat.style.setProperty("--fc", t.c); feat.style.setProperty("--fct", t.ct);
-  document.getElementById("feat-label").textContent = `${t.name} tier`;
-  quote.innerHTML = t.line.split(" ").map((w,k)=>`<span class="w" style="--dl:${k*22}ms">${w}</span>`).join(" ");
-  document.getElementById("feat-pack").innerHTML = t.pack.map(([n,l])=>`<span><i>${n}</i>${l}</span>`).join("");
-  document.getElementById("benefit-list").innerHTML = t.items.map(([ic,h,p],k)=>`<li style="--dl:${120 + k*60}ms;--ic:${G[k%4]}"><span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${IC[ic]}</svg></span><div><h4>${h}</h4><p>${p}</p></div></li>`).join("");
-  document.getElementById("feat-note").innerHTML = `<em>${t.note[0]}</em>${t.note[1]}`;
-  document.getElementById("feat-price").textContent = t.price;
-  if (quoteSeen) { quote.classList.remove("play"); void quote.offsetWidth; quote.classList.add("play"); }
-}
+const slabsEl = document.getElementById("slabs");
+const NOTE_C = ["#FBBC05","#FBBC05","#34A853"];
 tiers.forEach((t,i)=>{
-  const li = document.createElement("li");
-  li.innerHTML = `<button type="button" style="--c:${t.c}"><span class="vs-idx">0${i+1}</span><span class="vs-body"><span class="vs-name">${t.name}</span><span class="vs-role">${t.price} · ${t.pack.map(p=>p.join(" ")).join(" + ")}</span></span><span class="vs-rule"></span></button>`;
-  const b = li.firstChild; ["mouseenter","focus","click"].forEach(ev=> b.addEventListener(ev, ()=> setTier(i)));
-  vsel.appendChild(li);
+  const el = document.createElement("article");
+  el.className = "slab"; el.style.setProperty("--c", t.c); el.id = "tier-" + t.name.toLowerCase();
+  el.innerHTML = `<div class="slab-grid">
+    <div class="fade-up io" style="--y:30px;--d:700ms">
+      <p class="slab-k">${t.name} tier · 0${i+1}</p>
+      <h3 class="slab-name">${t.name}</h3>
+      <p class="slab-price">${t.price}</p>
+      <div class="slab-pack">${t.pack.map(([n,l])=>`<span><i>${n}</i>${l}</span>`).join("")}</div>
+    </div>
+    <div class="fade-up io" style="--y:40px;--d:760ms;--dl:120ms">
+      <ul class="slab-card">${t.items.map(([ic,h,p],k)=>`<li><b>0${k+1}</b><div><h4>${h}</h4><p>${p}</p></div></li>`).join("")}</ul>
+      <p class="slab-note" style="--nc:${NOTE_C[i]}"><em>${t.note[0]}</em>${t.note[1]}</p>
+    </div>
+  </div>`;
+  slabsEl.appendChild(el);
 });
-setTier(0);
 
 /* text splitting */
 document.querySelectorAll("[data-letters]").forEach((el, li)=>{
@@ -767,11 +779,9 @@ document.querySelectorAll("#roles .line>.in").forEach((s,i)=> s.style.setPropert
 const io = new IntersectionObserver(es => es.forEach(e=>{
   if (!e.isIntersecting) return;
   e.target.classList.add("revealed");
-  if (e.target === quote) { quoteSeen = true; quote.classList.add("play"); }
   io.unobserve(e.target);
 }), { threshold: 0 });
 document.querySelectorAll(".io, .io-plain").forEach(el=> io.observe(el));
-io.observe(quote);
 
 /* countdown to kick-off (Dubai time) */
 (function(){
@@ -815,13 +825,13 @@ document.querySelector(".theme-btn").addEventListener("click", ()=>{
     mx += (tx - mx) * 0.12; my += (ty - my) * 0.12;
     if (tx < -900) { mx = tx; my = ty; }
     ctx.clearRect(0,0,W,H);
-    const base = isDark() ? "rgba(232,234,237,0.10)" : "rgba(31,31,31,0.09)";
+    const dk = isDark(), base = dk ? "rgba(241,243,244,0.07)" : "rgba(31,31,31,0.09)";
     for (const [x,y,c] of dots){
       const d = Math.hypot(x - mx, y - my);
       const near = d < R ? 1 - d/R : 0;
       const k = near * near;
       ctx.beginPath(); ctx.arc(x, y, 1 + k * 1.8, 0, 6.2832);
-      if (k > 0.04){ ctx.fillStyle = c; ctx.globalAlpha = 0.15 + k * 0.45; }
+      if (k > 0.04){ ctx.fillStyle = c; ctx.globalAlpha = (dk ? 0.25 : 0.15) + k * (dk ? 0.6 : 0.45); }
       else { ctx.fillStyle = base; ctx.globalAlpha = 1; }
       ctx.fill();
     }
