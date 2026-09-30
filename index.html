@@ -43,10 +43,10 @@ body{background:var(--background);color:var(--foreground);font-family:var(--font
 ::selection{background:var(--yellow);color:var(--ink)}
 
 /* dark theme */
-:root[data-theme="dark"]{--paper:#14120F;--ink:#F3EDE2;--background:#14120F;--foreground:#F3EDE2;--surface:#1C1915;--surface-2:#25211C;--muted:#A89F92;--line:rgba(243,237,226,0.12);--line-strong:rgba(243,237,226,0.8);--blue:#A8C7FA;--red:#F6AEA9;--yellow:#FDE293;--green:#A8DAB5;--blue-t:#A8C7FA;--red-t:#F6AEA9;--yellow-t:#FDE293;--green-t:#A8DAB5}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#14120F;--ink:#F3EDE2;--background:#14120F;--foreground:#F3EDE2;--surface:#1C1915;--surface-2:#25211C;--muted:#A89F92;--line:rgba(243,237,226,0.12);--line-strong:rgba(243,237,226,0.8);--blue:#A8C7FA;--red:#F6AEA9;--yellow:#FDE293;--green:#A8DAB5;--blue-t:#A8C7FA;--red-t:#F6AEA9;--yellow-t:#FDE293;--green-t:#A8DAB5}}
-:root[data-theme="dark"] .dark{--background:#1A1714;--surface:#221F1B;border-top:1px solid rgba(243,237,226,.08);box-shadow:inset 0 3px 0 0 transparent}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dark{--background:#1A1714;--surface:#221F1B;border-top:1px solid rgba(243,237,226,.08)}}
+:root[data-theme="dark"]{--paper:#120C22;--ink:#F3EDE2;--background:#120C22;--foreground:#F3EDE2;--surface:#1E1633;--surface-2:#271D3E;--muted:#A89F92;--line:rgba(243,237,226,0.12);--line-strong:rgba(243,237,226,0.8);--blue:#A8C7FA;--red:#F6AEA9;--yellow:#FDE293;--green:#A8DAB5;--blue-t:#A8C7FA;--red-t:#F6AEA9;--yellow-t:#FDE293;--green-t:#A8DAB5}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#120C22;--ink:#F3EDE2;--background:#120C22;--foreground:#F3EDE2;--surface:#1E1633;--surface-2:#271D3E;--muted:#A89F92;--line:rgba(243,237,226,0.12);--line-strong:rgba(243,237,226,0.8);--blue:#A8C7FA;--red:#F6AEA9;--yellow:#FDE293;--green:#A8DAB5;--blue-t:#A8C7FA;--red-t:#F6AEA9;--yellow-t:#FDE293;--green-t:#A8DAB5}}
+:root[data-theme="dark"] .dark{--background:#1A1230;--surface:#221938;border-top:1px solid rgba(243,237,226,.08);box-shadow:inset 0 3px 0 0 transparent}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dark{--background:#1A1230;--surface:#221938;border-top:1px solid rgba(243,237,226,.08)}}
 /* brand-coloured fills always keep dark text on light */
 .hero-meta,.p-num,.hero-roles .line:nth-child(3) .in{--ink:#1B1814;--paper:#F3EDE2;--muted:#4A4238;--line:rgba(27,24,20,0.14)}
 .inc .p-num{border-color:#F3EDE2}
@@ -60,7 +60,7 @@ body,.site-header,.marquee,.mobile-menu{transition:background-color .4s ease,col
 .nav-right{display:flex;align-items:center;gap:1.5rem}
 @media (min-width:768px){.nav-right{gap:2.5rem}}
 main{z-index:1}
-.dark{--background:#1B1814;--foreground:#F3EDE2;--surface:#26221D;--surface-2:#2F2A24;--muted:#A89F92;--line:rgba(243,237,226,0.14);--line-strong:rgba(243,237,226,0.8);background:var(--background);color:var(--foreground)}
+.dark{--background:#1B1814;--foreground:#F3EDE2;--surface:#241A3A;--surface-2:#2E2247;--muted:#A89F92;--line:rgba(243,237,226,0.14);--line-strong:rgba(243,237,226,0.8);background:var(--background);color:var(--foreground)}
 .eyebrow{display:flex;align-items:center;gap:.75rem;font-size:.8125rem;line-height:1.2;font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:var(--blue-t)}
 .eyebrow::before{content:"";width:.5rem;height:.5rem;border-radius:9999px;background:currentColor;flex-shrink:0}
 .dark .eyebrow{color:var(--yellow)}
@@ -133,6 +133,34 @@ main{position:relative;width:100%;overflow-x:clip}
 @media (max-width:639px){.countdown{align-items:flex-start}}
 .hero-desc strong{color:var(--ink);font-weight:600}
 @media (min-width:640px){.hero-top{flex-direction:row;align-items:flex-start;justify-content:space-between;padding-top:8rem}.hero-roles{font-size:3rem}.hero-side{text-align:right}.hero-meta{justify-content:flex-end}}
+/* hero scene: calm flat-vector dusk — planet, ring, layered hills fading into the page */
+#top{position:relative;overflow:hidden;
+  --s1:#EDE3F3;--s2:#F8DDCB;--p1:#FAD7B0;--p2:#EBA9BE;--p3:#FFF1DE;--r1:#C9A3DC;--r2:#FFFFFF;
+  --h1:#DCCBE8;--h2:#E9DDE6;--star:transparent}
+:root[data-theme="dark"] #top{--s1:#1B0F3A;--s2:#5A2A6E;--p1:#FFD0A0;--p2:#E0709E;--p3:#FFE6C8;--r1:#C77BE6;--r2:#FFD6F5;--h1:#3A1F5C;--h2:#2B1748;--star:#FFFFFF}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #top{--s1:#1B0F3A;--s2:#5A2A6E;--p1:#FFD0A0;--p2:#E0709E;--p3:#FFE6C8;--r1:#C77BE6;--r2:#FFD6F5;--h1:#3A1F5C;--h2:#2B1748;--star:#FFFFFF}}
+
+/* the descent: one landscape behind the whole page — strata → cave → crystals → underground lake */
+:root{--w0:#EADFD0;--w1:#D6BD9C;--w2:#43304A;--w3:#221830;--w4:#0E1622;--band:rgba(110,70,30,.09);--rock:#C8AA85;--wall:rgba(0,0,0,.22)}
+:root[data-theme="dark"]{--w0:#2B1748;--w1:#3E1F45;--w2:#221538;--w3:#140D26;--w4:#071424;--band:rgba(255,220,255,.04);--rock:#35204A;--wall:rgba(0,0,0,.35)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--w0:#2B1748;--w1:#3E1F45;--w2:#221538;--w3:#140D26;--w4:#071424;--band:rgba(255,220,255,.04);--rock:#35204A;--wall:rgba(0,0,0,.35)}}
+.world{position:absolute;left:0;top:0;width:100%;z-index:0;pointer-events:none;overflow:hidden}
+.world svg{display:block}
+main>section,main>footer,main>.slabs{position:relative;z-index:1}
+#included.dark,#tiers.dark,#contact.dark{background:transparent}
+.w-ff{animation:wff var(--d,7s) ease-in-out infinite alternate;animation-delay:var(--dl,0s)}
+@keyframes wff{from{transform:translate(0,0);opacity:.15}to{transform:translate(var(--dx),var(--dy));opacity:.95}}
+.w-pulse{animation:wpulse 4.5s ease-in-out infinite alternate;animation-delay:var(--dl,0s)}
+@keyframes wpulse{from{opacity:.25}to{opacity:.7}}
+.w-shim{animation:wshim var(--d,6s) linear infinite;animation-delay:var(--dl,0s)}
+@keyframes wshim{0%{transform:translateX(-30px);opacity:0}50%{opacity:.8}100%{transform:translateX(30px);opacity:0}}
+@media (prefers-reduced-motion:reduce){.w-ff,.w-pulse,.w-shim{animation:none}}
+.scene{position:absolute;inset:0;z-index:0;width:100%;height:100%;pointer-events:none}
+.sc-stars{fill:var(--star);opacity:.7}
+.sc-planet,.sc-h1,.sc-h2{will-change:transform}
+.sc-h1{fill:var(--h1)}.sc-h2{fill:var(--h2)}.sc-h3{fill:var(--w0)}
+#top .hero-deco{display:none!important}
+@media (max-width:639px){.sc-planet{transform:translate(190px,-235px) scale(.6)}}
 .hero-bottom{position:relative;z-index:10;display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;padding:3rem var(--gutter) 0}
 .hero-name{font-family:var(--font-display);line-height:.86;letter-spacing:-0.05em;font-size:2.75rem;font-weight:800;color:var(--ink);min-width:0}
 .hero-name .nl{display:flex;align-items:center;gap:.12em;white-space:nowrap;overflow:hidden;padding:.04em .12em .06em .02em}
@@ -247,7 +275,7 @@ main{position:relative;width:100%;overflow-x:clip}
 .slab-art{position:absolute;right:-3rem;bottom:-3rem;width:16rem;opacity:.9;pointer-events:none}
 @media (max-width:1023px){.slab-art{display:none}}
 /* tier slabs — dark variant: dark panels, tier colour as accent */
-:root[data-theme="dark"] .slab{--ink-s:#F3EDE2;background:#171512;color:#F3EDE2;border-top:1px solid rgba(243,237,226,.08)}
+:root[data-theme="dark"] .slab{--ink-s:#F3EDE2;background:#140D26;color:#F3EDE2;border-top:1px solid rgba(243,237,226,.08)}
 :root[data-theme="dark"] .slab:last-child{border-bottom:1px solid rgba(243,237,226,.08)}
 :root[data-theme="dark"] .slab-k{background:color-mix(in srgb,var(--c) 16%,transparent);color:var(--c);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 45%,transparent)}
 :root[data-theme="dark"] .slab-name{color:var(--c);-webkit-text-stroke:0;text-shadow:.05em .05em 0 color-mix(in srgb,var(--sh) 55%,transparent)}
@@ -255,14 +283,14 @@ main{position:relative;width:100%;overflow-x:clip}
 :root[data-theme="dark"] .slab-pack{border-top:1px solid rgba(243,237,226,.12)}
 :root[data-theme="dark"] .slab-pack span{background:rgba(243,237,226,.04);border:1px solid rgba(243,237,226,.16)}
 :root[data-theme="dark"] .slab-pack i{border:0;color:#1B1814}
-:root[data-theme="dark"] .slab-card{background:#1F1C18;color:#F3EDE2;border:1px solid rgba(243,237,226,.1);border-top:3px solid var(--c);box-shadow:0 1.5rem 3rem -1.5rem rgba(0,0,0,.7)}
+:root[data-theme="dark"] .slab-card{background:#1E1535;color:#F3EDE2;border:1px solid rgba(243,237,226,.1);border-top:3px solid var(--c);box-shadow:0 1.5rem 3rem -1.5rem rgba(0,0,0,.7)}
 :root[data-theme="dark"] .slab-card li{border-bottom:1px solid rgba(243,237,226,.08)}
 :root[data-theme="dark"] .slab-card li:hover{background:color-mix(in srgb,var(--c) 10%,transparent)}
 :root[data-theme="dark"] .slab-card b{border:0;color:#1B1814}
 :root[data-theme="dark"] .slab-card p{color:#A89F92}
-:root[data-theme="dark"] .slab-note{background:#1F1C18;color:#F3EDE2;border:1px solid rgba(243,237,226,.1)}
+:root[data-theme="dark"] .slab-note{background:#1E1535;color:#F3EDE2;border:1px solid rgba(243,237,226,.1)}
 @media (prefers-color-scheme:dark){
-:root:not([data-theme="light"]) .slab{--ink-s:#F3EDE2;background:#171512;color:#F3EDE2;border-top:1px solid rgba(243,237,226,.08)}
+:root:not([data-theme="light"]) .slab{--ink-s:#F3EDE2;background:#140D26;color:#F3EDE2;border-top:1px solid rgba(243,237,226,.08)}
 :root:not([data-theme="light"]) .slab:last-child{border-bottom:1px solid rgba(243,237,226,.08)}
 :root:not([data-theme="light"]) .slab-k{background:color-mix(in srgb,var(--c) 16%,transparent);color:var(--c);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 45%,transparent)}
 :root:not([data-theme="light"]) .slab-name{color:var(--c);-webkit-text-stroke:0;text-shadow:.05em .05em 0 color-mix(in srgb,var(--sh) 55%,transparent)}
@@ -270,12 +298,12 @@ main{position:relative;width:100%;overflow-x:clip}
 :root:not([data-theme="light"]) .slab-pack{border-top:1px solid rgba(243,237,226,.12)}
 :root:not([data-theme="light"]) .slab-pack span{background:rgba(243,237,226,.04);border:1px solid rgba(243,237,226,.16)}
 :root:not([data-theme="light"]) .slab-pack i{border:0;color:#1B1814}
-:root:not([data-theme="light"]) .slab-card{background:#1F1C18;color:#F3EDE2;border:1px solid rgba(243,237,226,.1);border-top:3px solid var(--c);box-shadow:0 1.5rem 3rem -1.5rem rgba(0,0,0,.7)}
+:root:not([data-theme="light"]) .slab-card{background:#1E1535;color:#F3EDE2;border:1px solid rgba(243,237,226,.1);border-top:3px solid var(--c);box-shadow:0 1.5rem 3rem -1.5rem rgba(0,0,0,.7)}
 :root:not([data-theme="light"]) .slab-card li{border-bottom:1px solid rgba(243,237,226,.08)}
 :root:not([data-theme="light"]) .slab-card li:hover{background:color-mix(in srgb,var(--c) 10%,transparent)}
 :root:not([data-theme="light"]) .slab-card b{border:0;color:#1B1814}
 :root:not([data-theme="light"]) .slab-card p{color:#A89F92}
-:root:not([data-theme="light"]) .slab-note{background:#1F1C18;color:#F3EDE2;border:1px solid rgba(243,237,226,.1)}
+:root:not([data-theme="light"]) .slab-note{background:#1E1535;color:#F3EDE2;border:1px solid rgba(243,237,226,.1)}
 }
 /* tier detail (interactive) — tabs on top, horizontal panel */
 .voices-grid{margin-top:3rem;display:block}
@@ -426,7 +454,34 @@ main{position:relative;width:100%;overflow-x:clip}
 
 <main>
   <!-- HERO -->
+  <div class="world" id="world" aria-hidden="true"></div>
   <section id="top">
+    <svg class="scene" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="sc-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--s1)"/><stop offset="1" style="stop-color:var(--s2)"/></linearGradient>
+        <linearGradient id="sc-pl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--p1)"/><stop offset="1" style="stop-color:var(--p2)"/></linearGradient>
+        <clipPath id="sc-clip"><circle cx="1060" cy="400" r="240"/></clipPath>
+      </defs>
+      <rect width="1440" height="900" fill="url(#sc-sky)"/>
+      <g class="sc-stars">
+        <circle cx="120" cy="90" r="1.6"/><circle cx="340" cy="160" r="1.2"/><circle cx="560" cy="70" r="1.8"/><circle cx="700" cy="220" r="1"/>
+        <circle cx="820" cy="110" r="1.4"/><circle cx="1320" cy="80" r="1.8"/><circle cx="1400" cy="260" r="1.2"/><circle cx="240" cy="300" r="1"/>
+        <circle cx="620" cy="360" r="1.3"/><circle cx="1260" cy="620" r="1"/><circle cx="480" cy="250" r="1"/><circle cx="1180" cy="140" r="1.1"/>
+      </g>
+      <g class="sc-planet"><g transform="translate(331 172) scale(.82)">
+        <ellipse cx="1060" cy="410" rx="430" ry="64" transform="rotate(-12 1060 410)" fill="none" style="stroke:var(--r1)" stroke-width="10" opacity=".45"/>
+        <circle cx="1060" cy="400" r="240" fill="url(#sc-pl)"/>
+        <g clip-path="url(#sc-clip)" style="fill:var(--p3)" opacity=".55">
+          <path d="M860 300c60-40 120 10 170-20s90-70 150-30 40 110-20 130-120-10-170 30-140 20-150-40 20-50 20-70z"/>
+          <path d="M1010 520c50-30 110-10 150 20s90 40 130 10v120H960c-10-60 10-120 50-150z" opacity=".7"/>
+        </g>
+        <path d="M640 410 A430 64 0 0 0 1490 410" transform="rotate(-12 1060 410)" fill="none" style="stroke:var(--r1)" stroke-width="14" stroke-linecap="round"/>
+        <path d="M700 430 A380 50 0 0 0 1430 430" transform="rotate(-12 1060 410)" fill="none" style="stroke:var(--r2)" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+      </g></g>
+      <path class="sc-h1" d="M0 640 C180 590 320 610 470 570 S760 540 900 600 1200 560 1440 610 V900 H0Z"/>
+      <path class="sc-h2" d="M0 730 C220 690 380 720 560 690 S900 650 1080 700 1320 680 1440 700 V900 H0Z"/>
+      <path class="sc-h3" d="M0 830 C260 800 520 820 760 800 S1180 790 1440 810 V900 H0Z"/>
+    </svg>
     <div class="hero-top">
       <h2 class="hero-roles" id="roles">
         <span class="line"><span class="in">Builders.</span></span>
@@ -506,7 +561,7 @@ main{position:relative;width:100%;overflow-x:clip}
   </section>
 
   <!-- TIER DETAIL (pp.5–8, interactive) -->
-  <section id="tiers" class="section" style="padding-bottom:3rem">
+  <section id="tiers" class="section dark" style="padding-bottom:3rem">
     <div class="head-row">
       <div><p class="eyebrow">Sponsorship Tiers</p><h2 class="sec-h up" data-lines>Three ways to partner.</h2></div>
       <p class="label">Gold · Silver · Bronze</p>
@@ -579,6 +634,110 @@ function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
 const header = document.querySelector(".site-header");
 lenis.on("scroll", ({ scroll }) => header.classList.toggle("scrolled", scroll > 40));
+
+/* the descent: draw one landscape the full height of the page, keyed to where each section sits */
+(function(){
+  const world = document.getElementById("world"), main = world.parentElement;
+  const top = id => document.getElementById(id).offsetTop;
+  let seed;
+  const rnd = (a = 0, b = 1) => { seed = (seed * 16807) % 2147483647; return a + (b - a) * (seed - 1) / 2147483646; };
+  const wavy = (y, W, amp, step) => { let d = ""; for (let x = 0; x <= W + step; x += step) d += (x ? " L" : "M") + x + " " + (y + rnd(-amp, amp)).toFixed(1); return d; };
+  const METAL = { gold:["#FFE9A8","#E9BE4F","#8A6210"], silver:["#F7F9FC","#C3CAD4","#6F7885"], bronze:["#F5CFAE","#CD8A55","#6E3D1B"] };
+  function build(){
+    seed = 20261102;
+    const W = main.clientWidth, H = main.scrollHeight;
+    const s0 = top("top") + document.getElementById("top").offsetHeight, s1 = top("included");
+    const c1 = top("tiers"), l0 = top("contact"), f = v => (v / H).toFixed(4);
+    let o = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><defs>
+      <linearGradient id="wg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" style="stop-color:var(--w0)"/><stop offset="${f(s0)}" style="stop-color:var(--w0)"/>
+        <stop offset="${f(s1 - 40)}" style="stop-color:var(--w1)"/><stop offset="${f(s1 + 120)}" style="stop-color:var(--w2)"/>
+        <stop offset="${f(c1 + 200)}" style="stop-color:var(--w3)"/><stop offset="${f(l0)}" style="stop-color:var(--w3)"/>
+        <stop offset="1" style="stop-color:var(--w4)"/></linearGradient>
+      <radialGradient id="whalo"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+      ${Object.entries(METAL).map(([k,[a,b,c]]) => `<linearGradient id="wm-${k}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}"/><stop offset=".5" stop-color="${b}"/><stop offset="1" stop-color="${c}"/></linearGradient>`).join("")}
+    </defs><rect width="${W}" height="${H}" fill="url(#wg)"/>`;
+
+    /* strata: soft rock bands, roots hanging from the hills, cliff edges */
+    for (let y = s0 + 60, i = 0; y < s1 - 80; y += rnd(110, 170), i++){
+      const th = rnd(28, 70), up = [], dn = [];
+      for (let x = 0; x <= W + 120; x += 120){ up.push(`${x} ${(y + rnd(-14, 14)).toFixed(1)}`); dn.push(`${x} ${(y + th + rnd(-14, 14)).toFixed(1)}`); }
+      o += `<path d="M${up.join(" L")} L${dn.reverse().join(" L")} Z" style="fill:var(--band)"/>`;
+    }
+    for (let i = 0; i < 9; i++){
+      const x = rnd(.04, .96) * W, len = rnd(90, 260);
+      o += `<path d="M${x} ${s0 - 10} q${rnd(-30,30)} ${len*.4} ${rnd(-20,20)} ${len*.7} t${rnd(-25,25)} ${len*.3}" fill="none" style="stroke:var(--rock)" stroke-width="${rnd(1.5,3.5)}" stroke-linecap="round" opacity=".7"/>`;
+    }
+    const edge = (x0, dir, y0, y1, depth, fill) => {
+      let d = `M${x0} ${y0}`;
+      for (let y = y0; y <= y1; y += rnd(40, 90)) d += ` L${x0 + dir * rnd(depth * .3, depth)} ${y}`;
+      return `<path d="${d} L${x0} ${y1} Z" style="fill:${fill}"/>`;
+    };
+    const ew = Math.min(90, W * .06);
+    o += edge(0, 1, s0, s1, ew, "var(--rock)") + edge(W, -1, s0, s1, ew, "var(--rock)");
+
+    /* cave ceiling: stalactites hanging into the Included section */
+    for (const [lay, op, depth] of [[0, 1, 150], [1, .5, 230]]){
+      let d = `M${W} ${s1 - 60} L0 ${s1 - 60}`;
+      for (let x = 0; x < W; ){
+        const w = rnd(30, 90), tip = rnd(20, depth);
+        d += ` L${x} ${s1 + rnd(0, 18)} L${x + w / 2} ${s1 + tip} L${x + w} ${s1 + rnd(0, 18)}`; x += w;
+      }
+      o += `<path d="${d} Z" style="fill:${lay ? "var(--wall)" : "var(--w1)"}" opacity="${op}"/>`;
+    }
+    o += edge(0, 1, s1, H, ew * 1.4, "var(--wall)") + edge(W, -1, s1, H, ew * 1.4, "var(--wall)");
+
+    /* crystal clusters in gold / silver / bronze around the tiers */
+    const cluster = (x, y, metal, scale) => {
+      let g = `<circle class="w-pulse" style="--dl:${rnd(0,3).toFixed(2)}s" cx="${x}" cy="${y - 50 * scale}" r="${120 * scale}" fill="url(#whalo)" opacity=".4" style="mix-blend-mode:soft-light"/>`;
+      for (let i = 0; i < 6; i++){
+        const w = rnd(12, 28) * scale, h = rnd(60, 170) * scale, a = rnd(-32, 32), bx = x + rnd(-40, 40) * scale;
+        g += `<polygon transform="rotate(${a.toFixed(1)} ${bx} ${y})" points="${bx - w/2},${y} ${bx - w/2},${y - h*.72} ${bx},${y - h} ${bx + w/2},${y - h*.72} ${bx + w/2},${y}" fill="url(#wm-${metal})" opacity=".9"/>`;
+      }
+      return g;
+    };
+    const sc = W < 640 ? .6 : 1;
+    o += cluster(W * .06, c1 + 40, "bronze", sc) + cluster(W * .94, c1 + 10, "gold", sc * 1.1)
+       + cluster(W * .9, l0 + 40, "silver", sc * .9) + cluster(W * .05, l0 + 90, "gold", sc * .8);
+
+    /* fireflies through the cave */
+    for (let i = 0; i < 46; i++){
+      const y = rnd(s1 + 60, H - 40), x = rnd(0, W);
+      o += `<circle class="w-ff" cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${rnd(1.2, 2.6).toFixed(1)}" fill="${rnd() > .3 ? "#FFD98A" : "#8FF0E4"}"
+        style="--dx:${rnd(-40,40).toFixed(0)}px;--dy:${rnd(-50,20).toFixed(0)}px;--d:${rnd(5,11).toFixed(1)}s;--dl:${rnd(-8,0).toFixed(1)}s"/>`;
+    }
+
+    /* underground lake along the bottom, with stalagmites and shimmer */
+    const lake = H - Math.min(170, H * .04 + 120);
+    let sm = `M0 ${lake}`;
+    for (let x = 0; x < W; ){ const w = rnd(40, 110), h = rnd(10, 90); sm += ` L${x + w / 2} ${lake - h} L${x + w} ${lake}`; x += w; }
+    o += `<path d="${sm} L${W} ${H} L0 ${H} Z" fill="#050A12" opacity=".75"/>`;
+    o += `<rect x="0" y="${lake}" width="${W}" height="${H - lake}" fill="#3FC7D6" opacity=".08"/>`;
+    for (let i = 0; i < 22; i++){
+      const y = rnd(lake + 14, H - 10), x = rnd(0, W - 60);
+      o += `<rect class="w-shim" x="${x.toFixed(0)}" y="${y.toFixed(0)}" width="${rnd(20, 70).toFixed(0)}" height="1.5" rx=".75" fill="#9FF3F0" style="--d:${rnd(4,8).toFixed(1)}s;--dl:${rnd(-8,0).toFixed(1)}s"/>`;
+    }
+    world.style.height = H + "px";
+    world.innerHTML = o + "</svg>";
+  }
+  let t, lastW = 0, lastH = 0;
+  const schedule = () => { clearTimeout(t); t = setTimeout(() => {
+    if (main.clientWidth === lastW && main.scrollHeight === lastH) return;
+    lastW = main.clientWidth; lastH = main.scrollHeight; build();
+  }, 120); };
+  new ResizeObserver(schedule).observe(main);
+  addEventListener("load", schedule);
+  schedule();
+})();
+
+/* hero scene parallax: planet drifts slower than the hills */
+const scPlanet = document.querySelector(".sc-planet"), scH1 = document.querySelector(".sc-h1"), scH2 = document.querySelector(".sc-h2");
+if (!reduced) lenis.on("scroll", ({ scroll }) => {
+  if (scroll > innerHeight * 1.2) return;
+  scPlanet.style.translate = `0 ${scroll * .35}px`;
+  scH1.style.translate = `0 ${scroll * .18}px`;
+  scH2.style.translate = `0 ${scroll * .08}px`;
+});
 
 
 /* anchors */
