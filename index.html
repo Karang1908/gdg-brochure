@@ -150,11 +150,13 @@ main>section,main>footer,main>.slabs{position:relative;z-index:1}
 #included.dark,#tiers.dark,#contact.dark{background:transparent}
 .w-ff{animation:wff var(--d,7s) ease-in-out infinite alternate;animation-delay:var(--dl,0s)}
 @keyframes wff{from{transform:translate(0,0);opacity:.15}to{transform:translate(var(--dx),var(--dy));opacity:.95}}
+.w-float{animation:wfloat var(--d,9s) ease-in-out infinite alternate;animation-delay:var(--dl,0s)}
+@keyframes wfloat{to{transform:translateY(-14px)}}
 .w-pulse{animation:wpulse 4.5s ease-in-out infinite alternate;animation-delay:var(--dl,0s)}
 @keyframes wpulse{from{opacity:.25}to{opacity:.7}}
 .w-shim{animation:wshim var(--d,6s) linear infinite;animation-delay:var(--dl,0s)}
 @keyframes wshim{0%{transform:translateX(-30px);opacity:0}50%{opacity:.8}100%{transform:translateX(30px);opacity:0}}
-@media (prefers-reduced-motion:reduce){.w-ff,.w-pulse,.w-shim{animation:none}}
+@media (prefers-reduced-motion:reduce){.w-ff,.w-pulse,.w-shim,.w-float{animation:none}}
 .scene{position:absolute;inset:0;z-index:0;width:100%;height:100%;pointer-events:none}
 .sc-stars{fill:var(--star);opacity:.7}
 .sc-planet,.sc-h1,.sc-h2{will-change:transform}
@@ -641,6 +643,15 @@ lenis.on("scroll", ({ scroll }) => header.classList.toggle("scrolled", scroll > 
   const top = id => document.getElementById(id).offsetTop;
   let seed;
   const rnd = (a = 0, b = 1) => { seed = (seed * 16807) % 2147483647; return a + (b - a) * (seed - 1) / 2147483646; };
+  /* Catmull-Rom → cubic Bézier: every outline is a soft curve, like the hero hills */
+  const smooth = (pts, move = true) => {
+    let d = move ? `M${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}` : ` L${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
+    for (let i = 0; i < pts.length - 1; i++){
+      const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
+      d += ` C${(p1[0] + (p2[0] - p0[0]) / 6).toFixed(1)} ${(p1[1] + (p2[1] - p0[1]) / 6).toFixed(1)} ${(p2[0] - (p3[0] - p1[0]) / 6).toFixed(1)} ${(p2[1] - (p3[1] - p1[1]) / 6).toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
+    }
+    return d;
+  };
   const wavy = (y, W, amp, step) => { let d = ""; for (let x = 0; x <= W + step; x += step) d += (x ? " L" : "M") + x + " " + (y + rnd(-amp, amp)).toFixed(1); return d; };
   const METAL = { gold:["#FFE9A8","#E9BE4F","#8A6210"], silver:["#F7F9FC","#C3CAD4","#6F7885"], bronze:["#F5CFAE","#CD8A55","#6E3D1B"] };
   function build(){
@@ -658,47 +669,55 @@ lenis.on("scroll", ({ scroll }) => header.classList.toggle("scrolled", scroll > 
       ${Object.entries(METAL).map(([k,[a,b,c]]) => `<linearGradient id="wm-${k}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}"/><stop offset=".5" stop-color="${b}"/><stop offset="1" stop-color="${c}"/></linearGradient>`).join("")}
     </defs><rect width="${W}" height="${H}" fill="url(#wg)"/>`;
 
-    /* strata: soft rock bands, roots hanging from the hills, cliff edges */
-    for (let y = s0 + 60, i = 0; y < s1 - 80; y += rnd(110, 170), i++){
-      const th = rnd(28, 70), up = [], dn = [];
-      for (let x = 0; x <= W + 120; x += 120){ up.push(`${x} ${(y + rnd(-14, 14)).toFixed(1)}`); dn.push(`${x} ${(y + th + rnd(-14, 14)).toFixed(1)}`); }
-      o += `<path d="M${up.join(" L")} L${dn.reverse().join(" L")} Z" style="fill:var(--band)"/>`;
+    /* strata: soft layered rock bands and a few hanging roots */
+    for (let y = s0 + 70; y < s1 - 120; y += rnd(120, 180)){
+      const th = rnd(36, 80), up = [], dn = [];
+      for (let x = -60; x <= W + 240; x += 240){ up.push([x, y + rnd(-18, 18)]); dn.push([x, y + th + rnd(-18, 18)]); }
+      o += `<path d="${smooth(up)}${smooth(dn.reverse(), false)} Z" style="fill:var(--band)"/>`;
     }
-    for (let i = 0; i < 9; i++){
-      const x = rnd(.04, .96) * W, len = rnd(90, 260);
-      o += `<path d="M${x} ${s0 - 10} q${rnd(-30,30)} ${len*.4} ${rnd(-20,20)} ${len*.7} t${rnd(-25,25)} ${len*.3}" fill="none" style="stroke:var(--rock)" stroke-width="${rnd(1.5,3.5)}" stroke-linecap="round" opacity=".7"/>`;
+    for (let i = 0; i < 7; i++){
+      const x = rnd(.05, .95) * W, len = rnd(110, 260);
+      o += `<path d="M${x} ${s0 - 10} q${rnd(-30,30)} ${len*.4} ${rnd(-20,20)} ${len*.7} t${rnd(-25,25)} ${len*.3}" fill="none" style="stroke:var(--rock)" stroke-width="${rnd(2,3.5)}" stroke-linecap="round" opacity=".55"/>`;
     }
-    const edge = (x0, dir, y0, y1, depth, fill) => {
-      let d = `M${x0} ${y0}`;
-      for (let y = y0; y <= y1; y += rnd(40, 90)) d += ` L${x0 + dir * rnd(depth * .3, depth)} ${y}`;
-      return `<path d="${d} L${x0} ${y1} Z" style="fill:${fill}"/>`;
+    /* soft rounded side walls */
+    const wall = (x0, dir, y0, y1, depth, fill, op = 1) => {
+      const pts = [[x0, y0]];
+      for (let y = y0; y <= y1; y += rnd(160, 260)) pts.push([x0 + dir * rnd(depth * .25, depth), y]);
+      pts.push([x0, y1]);
+      return `<path d="${smooth(pts)} Z" style="fill:${fill}" opacity="${op}"/>`;
     };
-    const ew = Math.min(90, W * .06);
-    o += edge(0, 1, s0, s1, ew, "var(--rock)") + edge(W, -1, s0, s1, ew, "var(--rock)");
+    const ew = Math.min(110, W * .07);
+    o += wall(0, 1, s0, s1, ew, "var(--rock)", .55) + wall(W, -1, s0, s1, ew, "var(--rock)", .55);
 
-    /* cave ceiling: stalactites hanging into the Included section */
-    for (const [lay, op, depth] of [[0, 1, 150], [1, .5, 230]]){
-      let d = `M${W} ${s1 - 60} L0 ${s1 - 60}`;
-      for (let x = 0; x < W; ){
-        const w = rnd(30, 90), tip = rnd(20, depth);
-        d += ` L${x} ${s1 + rnd(0, 18)} L${x + w / 2} ${s1 + tip} L${x + w} ${s1 + rnd(0, 18)}`; x += w;
+    /* cave ceiling: three layered bands of rounded drips, lightest in front — same layering as the hero hills */
+    for (const [fill, op, depth, off] of [["var(--wall)", .55, 220, 30], ["var(--rock)", .6, 150, 12], ["var(--w1)", 1, 95, 0]]){
+      const pts = [[-40, s1 + off]];
+      for (let x = -40; x < W + 80; ){
+        const w = rnd(70, 160);
+        pts.push([x + w * .5, s1 + off + rnd(depth * .35, depth)], [x + w, s1 + off + rnd(0, 16)]); x += w;
       }
-      o += `<path d="${d} Z" style="fill:${lay ? "var(--wall)" : "var(--w1)"}" opacity="${op}"/>`;
+      o += `<path d="M${W + 80} ${s1 - 80} L-40 ${s1 - 80}${smooth(pts, false)} L${W + 80} ${s1 - 80} Z" style="fill:${fill}" opacity="${op}"/>`;
     }
-    o += edge(0, 1, s1, H, ew * 1.4, "var(--wall)") + edge(W, -1, s1, H, ew * 1.4, "var(--wall)");
+    o += wall(0, 1, s1, H, ew * 1.3, "var(--wall)") + wall(W, -1, s1, H, ew * 1.3, "var(--wall)");
 
-    /* crystal clusters in gold / silver / bronze around the tiers */
-    const cluster = (x, y, metal, scale) => {
-      let g = `<circle class="w-pulse" style="--dl:${rnd(0,3).toFixed(2)}s" cx="${x}" cy="${y - 50 * scale}" r="${120 * scale}" fill="url(#whalo)" opacity=".4" style="mix-blend-mode:soft-light"/>`;
-      for (let i = 0; i < 6; i++){
-        const w = rnd(12, 28) * scale, h = rnd(60, 170) * scale, a = rnd(-32, 32), bx = x + rnd(-40, 40) * scale;
-        g += `<polygon transform="rotate(${a.toFixed(1)} ${bx} ${y})" points="${bx - w/2},${y} ${bx - w/2},${y - h*.72} ${bx},${y - h} ${bx + w/2},${y - h*.72} ${bx + w/2},${y}" fill="url(#wm-${metal})" opacity=".9"/>`;
-      }
-      return g;
+    /* little floating planets in gold / silver / bronze — echo the hero planet and the tiers */
+    let pid = 0;
+    const orb = (x, y, r, metal, ring) => {
+      const [a, b, c] = METAL[metal], id = "wo" + (pid++);
+      return `<g class="w-float" style="--dl:${rnd(-6,0).toFixed(1)}s;--d:${rnd(7,11).toFixed(1)}s">
+        <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${c}"/></linearGradient>
+        <radialGradient id="${id}h"><stop offset="0" stop-color="${b}" stop-opacity=".45"/><stop offset="1" stop-color="${b}" stop-opacity="0"/></radialGradient>
+        <clipPath id="${id}c"><circle cx="${x}" cy="${y}" r="${r}"/></clipPath></defs>
+        <circle class="w-pulse" cx="${x}" cy="${y}" r="${r * 2.6}" fill="url(#${id}h)"/>
+        ${ring ? `<ellipse cx="${x}" cy="${y}" rx="${r * 1.75}" ry="${r * .32}" transform="rotate(-14 ${x} ${y})" fill="none" stroke="${a}" stroke-width="${r * .06}" opacity=".45"/>` : ""}
+        <circle cx="${x}" cy="${y}" r="${r}" fill="url(#${id})"/>
+        <g clip-path="url(#${id}c)" fill="${a}" opacity=".45"><ellipse cx="${x - r * .35}" cy="${y - r * .3}" rx="${r * .7}" ry="${r * .38}" transform="rotate(-20 ${x} ${y})"/><ellipse cx="${x + r * .4}" cy="${y + r * .55}" rx="${r * .6}" ry="${r * .28}"/></g>
+        ${ring ? `<path d="M${x - r * 1.75} ${y} A${r * 1.75} ${r * .32} 0 0 0 ${x + r * 1.75} ${y}" transform="rotate(-14 ${x} ${y})" fill="none" stroke="${a}" stroke-width="${r * .08}" stroke-linecap="round"/>` : ""}
+      </g>`;
     };
-    const sc = W < 640 ? .6 : 1;
-    o += cluster(W * .06, c1 + 40, "bronze", sc) + cluster(W * .94, c1 + 10, "gold", sc * 1.1)
-       + cluster(W * .9, l0 + 40, "silver", sc * .9) + cluster(W * .05, l0 + 90, "gold", sc * .8);
+    const sc = W < 640 ? .55 : 1;
+    o += orb(W * .93, s1 + 250, 30 * sc, "bronze", false) + orb(W * .9, c1 + 30, 58 * sc, "gold", true)
+       + orb(W * .88, l0 + 90, 40 * sc, "silver", true) + orb(W * .6, l0 + 45, 20 * sc, "gold", false);
 
     /* fireflies through the cave */
     for (let i = 0; i < 46; i++){
@@ -707,11 +726,13 @@ lenis.on("scroll", ({ scroll }) => header.classList.toggle("scrolled", scroll > 
         style="--dx:${rnd(-40,40).toFixed(0)}px;--dy:${rnd(-50,20).toFixed(0)}px;--d:${rnd(5,11).toFixed(1)}s;--dl:${rnd(-8,0).toFixed(1)}s"/>`;
     }
 
-    /* underground lake along the bottom, with stalagmites and shimmer */
+    /* underground lake: soft rounded mounds, a still pool and slow shimmer */
     const lake = H - Math.min(170, H * .04 + 120);
-    let sm = `M0 ${lake}`;
-    for (let x = 0; x < W; ){ const w = rnd(40, 110), h = rnd(10, 90); sm += ` L${x + w / 2} ${lake - h} L${x + w} ${lake}`; x += w; }
-    o += `<path d="${sm} L${W} ${H} L0 ${H} Z" fill="#050A12" opacity=".75"/>`;
+    for (const [fill, op, hmax, off] of [["var(--wall)", .8, 120, -30], ["#050A12", .8, 60, 0]]){
+      const pts = [[-40, lake + off]];
+      for (let x = -40; x < W + 80; ){ const w = rnd(160, 320); pts.push([x + w * .5, lake + off - rnd(hmax * .3, hmax)], [x + w, lake + off - rnd(0, 12)]); x += w; }
+      o += `<path d="${smooth(pts)} L${W + 80} ${H} L-40 ${H} Z" style="fill:${fill}" opacity="${op}"/>`;
+    }
     o += `<rect x="0" y="${lake}" width="${W}" height="${H - lake}" fill="#3FC7D6" opacity=".08"/>`;
     for (let i = 0; i < 22; i++){
       const y = rnd(lake + 14, H - 10), x = rnd(0, W - 60);
