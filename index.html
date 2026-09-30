@@ -71,19 +71,6 @@ main{z-index:1}
 /* nav */
 .site-header{position:fixed;inset-inline:0;top:0;z-index:50;pointer-events:none;transition:background .4s,backdrop-filter .4s}
 .site-header.scrolled{background:color-mix(in srgb,var(--paper) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-/* cobalt poster hero: flat blue block, white type, yellow accents (same in both themes) */
-#top{--cobalt:#2D5BFF;--ink:#FFFFFF;--paper:var(--cobalt);--muted:rgba(255,255,255,.78);--line:rgba(255,255,255,.35);--line-strong:#FFFFFF;
-  --blue-t:#FFFFFF;--red-t:#FFFFFF;--yellow-t:#FFD23F;--green-t:#FFFFFF;position:relative;background:var(--cobalt);color:#FFFFFF}
-#top .hero-roles .line:nth-child(3) .in{background:#FFD23F;color:#14120F}
-#top .hero-meta li{--ink:#FFFFFF;background:transparent;color:#FFFFFF;border-color:#FFFFFF}
-#top .hero-meta li:nth-child(1){background:#FFD23F;color:#14120F;border-color:#FFD23F}
-#top .hero-meta li:nth-child(2){background:#FFFFFF;color:var(--cobalt);border-color:#FFFFFF}
-#top .hero-meta b{color:inherit}
-#top .hero-name .yr{color:#FFD23F}
-#top .cd-row span{background:rgba(255,255,255,.08);backdrop-filter:none}
-#top .cd-row b{color:#FFFFFF!important}
-#top .cd-row span:nth-child(4) b{color:#FFD23F!important}
-.site-header.on-hero{--ink:#FFFFFF;--blue-t:rgba(255,255,255,.8);--paper:#2D5BFF;color:#FFFFFF}
 .site-header nav{pointer-events:auto;display:flex;align-items:center;justify-content:space-between;padding:1.25rem var(--gutter)}
 .logo{display:flex;align-items:center;gap:.875rem}
 .logo img{width:3rem;height:auto}
@@ -227,7 +214,7 @@ main{position:relative;width:100%;overflow-x:clip}
 .inc{--d:560ms;--y:40px;padding:2rem;border:1.5px solid var(--line);border-radius:1.25rem;background:var(--surface);transition:border-color .35s,transform .45s var(--expo)}
 .inc:nth-child(1){--c:var(--blue)}.inc:nth-child(2){--c:var(--yellow)}.inc:nth-child(3){--c:var(--green)}
 .inc:hover{border-color:var(--c)}
-.inc .p-num{width:4rem;height:4rem;font-size:1.75rem;border-color:var(--paper);color:#14120F}
+.inc .p-num{width:4rem;height:4rem;font-size:1.75rem;border-color:var(--paper);color:var(--ink)}
 .inc h3{margin-top:1.5rem;font-size:1.75rem;font-weight:700;letter-spacing:-0.02em}
 .inc p{margin-top:1rem;max-width:32ch;font-size:1.1875rem;line-height:1.55;color:var(--muted)}
 .arches{margin-top:4rem;display:flex;justify-content:space-between;align-items:flex-end}
@@ -591,13 +578,7 @@ window.lenis = lenis;
 function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
 const header = document.querySelector(".site-header");
-const heroEl = document.getElementById("top");
-const onScrollHeader = scroll => {
-  header.classList.toggle("scrolled", scroll > 40);
-  header.classList.toggle("on-hero", scroll < heroEl.offsetHeight - header.offsetHeight);
-};
-lenis.on("scroll", ({ scroll }) => onScrollHeader(scroll));
-onScrollHeader(scrollY);
+lenis.on("scroll", ({ scroll }) => header.classList.toggle("scrolled", scroll > 40));
 
 
 /* anchors */
