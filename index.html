@@ -259,6 +259,10 @@ main>section,main>footer,main>.slabs{position:relative;z-index:1}
 @media (min-width:1024px){.slab-grid{grid-template-columns:5fr 7fr;gap:var(--gutter)}}
 @media (min-width:1024px) and (min-height:780px){.slab{position:sticky;top:0;min-height:100svh;display:flex;flex-direction:column;justify-content:center}.slab:nth-child(2){top:1.25rem}.slab:nth-child(3){top:2.5rem}.slab:nth-child(4){top:3.75rem}.slab-card.two{display:grid;grid-template-columns:1fr 1fr;column-gap:2rem}.slab-card.two li:nth-last-child(2):nth-child(odd){border-bottom:0}}
 .slab-k{display:inline-block;padding:.45rem .85rem;border-radius:9999px;background:var(--ink-s);color:var(--c);font-size:.75rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase}
+.slab-tags{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem}
+.slab-slots{display:inline-block;padding:.35rem .85rem;border-radius:9999px;border:2px solid var(--ink-s);background:#FBF7F0;color:var(--ink-s);font-size:.8125rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;box-shadow:.2rem .2rem 0 0 var(--ink-s)}
+:root[data-theme="dark"] .slab-slots{background:var(--c);color:#1B1814;border-color:var(--c);box-shadow:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .slab-slots{background:var(--c);color:#1B1814;border-color:var(--c);box-shadow:none}}
 .slab-name{margin-top:1.25rem;font-size:5.5rem;font-weight:800;line-height:.9;letter-spacing:-0.05em;color:#FBF7F0;-webkit-text-stroke:3px var(--ink-s);paint-order:stroke fill;text-shadow:.06em .06em 0 var(--sh),.06em .06em 0 var(--ink-s)}
 @media (min-width:640px){.slab-name{font-size:8rem}}
 @media (max-width:639px){.slab-name{font-size:4.3rem}}
@@ -919,7 +923,7 @@ tiers.forEach((t,i)=>{
   el.className = "slab"; el.style.setProperty("--c", t.c); el.style.setProperty("--sh", t.sh); el.style.setProperty("--hi", t.hi); el.style.setProperty("--lo", t.lo); el.id = "tier-" + t.name.toLowerCase();
   el.innerHTML = `<div class="slab-grid">
     <div class="fade-up io" style="--y:30px;--d:700ms">
-      <p class="slab-k">${t.name} tier · 0${i+1}${t.slots ? " · " + t.slots : ""}</p>
+      <div class="slab-tags"><p class="slab-k">${t.name} tier · 0${i+1}</p>${t.slots ? `<p class="slab-slots">${t.slots}</p>` : ""}</div>
       <h3 class="slab-name">${t.name}</h3>
       <p class="slab-price">${t.price}</p>
       <div class="slab-pack">${t.pack.map(([n,l])=>`<span><i>${n}</i>${l}</span>`).join("")}</div>
