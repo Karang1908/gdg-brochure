@@ -188,6 +188,13 @@ main>section,main>footer,main>.slabs{position:relative;z-index:1}
 .hero-deco .dot{width:3.75rem;border-radius:50%;border:2px solid var(--ink);position:absolute}
 .hero-deco .d1{background:var(--red);left:5rem;bottom:4.5rem}.hero-deco .d2{background:var(--blue);left:9.5rem;bottom:4.5rem}.hero-deco .d3{background:var(--green);left:6rem;bottom:0}
 .hero-deco .dots{width:4rem;right:0;bottom:.5rem;color:var(--blue)}
+.hero-about{position:relative;z-index:10;display:flex;flex-direction:column;gap:1rem;padding:1.5rem var(--gutter) 0;max-width:40rem}
+.hero-about-t{font-size:1rem;line-height:1.5;color:var(--muted)}
+.hero-about-t b{color:var(--ink);font-weight:800}
+.hero-about-links{display:flex;flex-wrap:wrap;gap:.5rem}
+.pill-link{display:inline-flex;align-items:center;gap:.4em;padding:.45rem .9rem;border:2px solid var(--ink);border-radius:9999px;font-size:.875rem;font-weight:600;color:var(--ink);background:var(--yellow);text-decoration:none;transition:transform 200ms var(--expo)}
+.pill-link.alt{background:var(--blue)}
+.pill-link:hover{transform:translateY(-2px)}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media (min-width:1024px){.hero-deco{display:block}}
 .scroll-cue{position:absolute;bottom:2rem;left:var(--gutter);z-index:30;display:flex;align-items:center;gap:.75rem;font-size:.8125rem;font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:var(--ink)}
@@ -549,6 +556,13 @@ main>section,main>footer,main>.slabs{position:relative;z-index:1}
       <div class="hero-deco" aria-hidden="true">
         <svg class="ring" viewBox="0 0 200 200"><defs><path id="ringp" d="M100,100 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/></defs><text><textPath href="#ringp" textLength="536">BUILD ✦ HACK ✦ SHIP ✦ 24 HOURS ✦ 2–3 NOV ✦ BPDC ✦ </textPath></text></svg>
         <svg class="globe" viewBox="0 0 100 100" fill="none" stroke="#1B1814" stroke-width="1.6"><circle cx="50" cy="50" r="46" fill="#FBBC05"/><ellipse cx="50" cy="50" rx="18" ry="46"/><path d="M4 50h92M9 30h82M9 70h82"/></svg>
+      </div>
+    </div>
+    <div class="hero-about fade-up">
+      <p class="hero-about-t"><b>About us.</b> GDG on Campus BITS Pilani Dubai is a student-run community for builders, learners and future engineers.</p>
+      <div class="hero-about-links">
+        <a class="pill-link" href="https://gdg.community.dev/gdg-on-campus-bits-pilani-dubai-united-arab-emirates/" target="_blank" rel="noopener">Google Community <span aria-hidden="true">↗</span></a>
+        <a class="pill-link alt" href="https://www.gdgocbpdc.tech/" target="_blank" rel="noopener">Our Website <span aria-hidden="true">↗</span></a>
       </div>
     </div>
     <div class="scroll-cue fade-up" id="scroll-cue">Scroll to partner</div>
