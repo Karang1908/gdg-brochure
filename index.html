@@ -634,9 +634,9 @@ html{font-size:4vw}
       <div><p class="eyebrow">Every Tier</p><h2 class="sec-h up" data-lines>Included in every tier.</h2></div>
     </div>
     <div class="inc-grid">
-      <div class="inc fade-up io" style="--dl:0ms"><span class="p-num" style="--c:var(--blue)">01</span><h3>Your session</h3><p>A dedicated speaking slot or workshop. Address participants with your choice of topic and format.</p></div>
-      <div class="inc fade-up io" style="--dl:110ms"><span class="p-num" style="--c:var(--yellow)">02</span><h3>Mentorship / judging</h3><p>Mentor or judge competition rounds and connect directly with talent.</p></div>
-      <div class="inc fade-up io" style="--dl:220ms"><span class="p-num" style="--c:var(--green)">03</span><h3>Homepage visibility</h3><p>Your company logo on the event website homepage.</p></div>
+      <div class="inc fade-up io" style="--dl:0ms"><span class="p-num" style="--c:var(--blue)">01</span><h3>Logo at the event</h3><p>Your company logo on event banners and digital posters.</p></div>
+      <div class="inc fade-up io" style="--dl:110ms"><span class="p-num" style="--c:var(--yellow)">02</span><h3>Social coverage</h3><p>Stories and posts on GDG BPDC’s social handles, scaled by tier.</p></div>
+      <div class="inc fade-up io" style="--dl:220ms"><span class="p-num" style="--c:var(--green)">03</span><h3>Website placement</h3><p>Your company on the event website, from sponsor listing to homepage hero.</p></div>
     </div>
   </section>
 
@@ -658,6 +658,7 @@ html{font-size:4vw}
         <p class="c-p fade-up io">Contact the organizing team to discuss your sponsorship.</p>
         <a class="email" href="mailto:gdsc@dubai.bits-pilani.ac.in">gdsc@dubai.bits-pilani.ac.in <span class="arr">↗</span></a>
         <p class="phone"><a href="tel:+971504885778">+971 50 488 5778</a><span>Nishvan Anbumani</span></p>
+        <p class="phone" style="margin-top:.6rem"><a href="tel:+971503521407">+971 50 352 1407</a><span>Anannya Pareek</span></p>
       </div>
       <aside class="c-card fade-up io" style="--dl:150ms;--y:30px" aria-label="Event details">
         <span class="c-dash" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
@@ -909,40 +910,46 @@ shots.forEach(([src,n,b,t,c],i)=>{
 });
 
 /* tier detail */
-const SHARED = "Plus every shared benefit: session or workshop, mentorship / judging, homepage logo";
 const tiers = [
   { name:"Diamond", price:"AED 7,000", slots:"1 slot only", c:"#BFE6F2", hi:"#F6FDFF", lo:"#7DB4D2", note_c:"#BFE6F2", sh:"#4A86A6",
     pack:[["5","Stories"],["3","Reels"],["2","Posts"]],
-    items:[["Promo video on loop","Your promotional video played throughout the event."],
-           ["Emails to every participant","Email promotions sent to all participants."],
-           ["Top logo placement","Top spot on all posters, banners and event merchandise."],
-           ["Dedicated booth / stall","Host a dedicated booth or stall at the event venue."],
-           ["Ceremony mentions","Mentioned during the opening and closing ceremonies."],
-           ["Prizes or goodies","Option to provide prizes or goodies, with acknowledgment."],
-           ["Full social promotion","Promotion on all GDG BPDC social handles and partner platforms."]],
+    items:[["Two problem statements","Two of the hackathon’s problem statements are yours."],
+           ["Top logo placement","Top logo placement across major event creatives."],
+           ["Priority-location booth","A booth or stall in a priority location at the venue."],
+           ["Promo video at the event","Your promotional video played during the event."],
+           ["Dedicated participant email","A dedicated email promotion sent to participants."],
+           ["Keynote or workshop","A 20–30 minute keynote or workshop."],
+           ["Mentorship / judging","A guaranteed mentorship or judging opportunity."],
+           ["Branded challenge or prize","Run a branded challenge or prize."],
+           ["Homepage hero placement","Hero placement on the event website homepage."],
+           ["Post-event report","A reach and engagement report after the event."]],
     note:["Title sponsor","“GDG Hackathon ’26 powered by [Company Name]”"] },
   { name:"Gold", price:"AED 5,000", slots:"Max 2 slots", c:"#E9BE4F", hi:"#FFF0B8", lo:"#B8860B", note_c:"#F2C14E", sh:"#8A6210",
     pack:[["4","Stories"],["2","Reels"],["1","Post"]],
-    items:[["Logo on everything","Logo on all posters, banners and event merchandise."],
-           ["Dedicated booth / stall","Host a dedicated booth or stall at the event venue."],
-           ["Ceremony mentions","Mentioned during the opening and closing ceremonies."],
-           ["Prizes or goodies","Option to provide prizes or goodies, with acknowledgment."],
+    items:[["Priority logo placement","Priority logo placement on event creatives."],
+           ["Booth / stall","Host a booth or stall at the event venue."],
            ["Participant email feature","Featured in one participant email."],
-           ["Social promotion","Promotion on GDG BPDC social handles and partner platforms."]],
-    note:["Co-title sponsor","“GDG Hackathon ’26 powered by [Diamond Sponsor], in association with [Company Name]”"] },
+           ["Speaking or workshop slot","A 15–20 minute speaking or workshop slot."],
+           ["Mentorship / judging","A mentorship or judging opportunity."],
+           ["Prizes or goodies","Contribute prizes or goodies, if requested."],
+           ["Priority homepage placement","Priority placement on the event website homepage."],
+           ["Post-event report","A visibility report after the event."]],
+    note:["Recognition","“GDG Hackathon ’26, in association with [Company Name]”"] },
   { name:"Silver", price:"AED 3,000", c:"#C3CAD4", hi:"#F7F9FC", lo:"#8A94A3", note_c:"#D5DBE3", sh:"#6F7885",
     pack:[["2","Stories"],["1","Reel"],["1","Post"]],
-    items:[["Logo visibility","Logo on posters and banners, plus social media mentions."],
-           ["Ceremony mentions","Mentioned during the opening and closing ceremonies."],
+    items:[["Logo visibility","Logo on posters, banners and digital creatives."],
+           ["Ceremony acknowledgment","Acknowledged at the opening or closing ceremony."],
+           ["Lightning talk or mentorship","A 5–10 minute lightning talk, or a mentorship opportunity."],
            ["Branded distribution","Distribute branded vouchers or merchandise."],
-           ["Silver Sponsor acknowledgment","Acknowledged as a “Silver Sponsor” in event promotions."]],
-    note:["Plus", SHARED.slice(5)] },
+           ["Website placement","Silver Sponsor placement on the event website."],
+           ["Post-event report","A basic visibility report after the event."]] },
   { name:"Bronze", price:"AED 1,500", c:"#CD8A55", hi:"#F5CFAE", lo:"#8E5328", note_c:"#E3A574", sh:"#6E3D1B",
     pack:[["1","Story"],["1","Post"]],
-    items:[["Logo presence","Logo displayed on event banners and digital posters."],
-           ["Social recognition","Mention on GDG BPDC’s Instagram story and LinkedIn post."],
-           ["Event acknowledgment","Acknowledgment during the event."]],
-    note:["Plus", SHARED.slice(5)] }
+    items:[["Logo presence","Logo on selected event banners and digital posters."],
+           ["Event acknowledgment","Acknowledgment during the event."],
+           ["Website placement","Bronze Sponsor placement on the event website."],
+           ["Vouchers or goodies","Opportunity to provide vouchers or goodies."],
+           ["Partnership certificate","A partnership acknowledgment certificate."]] }
 ];
 const IC = {
   bulb:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>',
@@ -970,8 +977,8 @@ tiers.forEach((t,i)=>{
       <div class="slab-pack">${t.pack.map(([n,l])=>`<span><i>${n}</i>${l}</span>`).join("")}</div>
     </div>
     <div class="fade-up io" style="--y:40px;--d:760ms;--dl:120ms">
-      <ul class="slab-card${t.items.length > 5 ? " two" : ""}">${t.items.map(([h,p],k)=>`<li><b>0${k+1}</b><div><h4>${h}</h4><p>${p}</p></div></li>`).join("")}</ul>
-      <p class="slab-note" style="--nc:${t.note_c}"><em>${t.note[0]}</em>${t.note[1]}</p>
+      <ul class="slab-card${t.items.length > 5 ? " two" : ""}">${t.items.map(([h,p],k)=>`<li><b>${String(k+1).padStart(2,"0")}</b><div><h4>${h}</h4><p>${p}</p></div></li>`).join("")}</ul>
+      ${t.note ? `<p class="slab-note" style="--nc:${t.note_c}"><em>${t.note[0]}</em>${t.note[1]}</p>` : ""}
     </div>
   </div>`;
   slabsEl.appendChild(el);
