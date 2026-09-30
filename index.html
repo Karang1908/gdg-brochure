@@ -59,8 +59,14 @@ body,.site-header,.marquee,.mobile-menu{transition:background-color .4s ease,col
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .theme-btn .sun{display:none}:root:not([data-theme="light"]) .theme-btn .moon{display:block}}
 .nav-right{display:flex;align-items:center;gap:1.5rem}
 @media (min-width:768px){.nav-right{gap:2.5rem}}
-/* page background: slow monochrome contour lines */
-.hero-bg{position:fixed;inset:0;z-index:0;width:100%;height:100%;pointer-events:none}
+/* page background: film grain + a soft light that follows the cursor */
+.spot{position:fixed;inset:0;z-index:0;pointer-events:none;--sx:70vw;--sy:30vh;background:radial-gradient(38rem 38rem at var(--sx) var(--sy),var(--spot),transparent 70%)}
+:root{--spot:rgba(255,255,255,.85);--grain-o:.08}
+:root[data-theme="dark"]{--spot:rgba(255,255,255,.075);--grain-o:.06}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--spot:rgba(255,255,255,.075);--grain-o:.06}}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:var(--grain-o);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:multiply}
+:root[data-theme="dark"] .grain{mix-blend-mode:screen;filter:invert(1)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .grain{mix-blend-mode:screen;filter:invert(1)}}
 main{z-index:1}
 .dark{--background:#1F1F1F;--foreground:#F0F0F0;--surface:#2A2A2A;--surface-2:#333;--muted:#A8A8A8;--line:rgba(240,240,240,0.14);--line-strong:rgba(240,240,240,0.8);background:var(--background);color:var(--foreground)}
 .eyebrow{display:flex;align-items:center;gap:.75rem;font-size:.8125rem;line-height:1.2;font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:var(--blue-t)}
@@ -393,7 +399,6 @@ main{position:relative;width:100%;overflow-x:clip}
 @media (hover:none),(max-width:768px){.liquid .veil{opacity:0}}
 
 @media (prefers-reduced-motion:reduce){
-  .hero-bg{display:none}
   .marquee-track,.bob,.hero-deco svg{animation:none!important}
   .hero-mark{opacity:1!important;transform:none!important}
   .line>.in,.ltr,.fade-up,.vp-wrap,.quote .w,.benefits li{transition:none!important;animation:none!important;opacity:1!important;transform:none!important}
@@ -402,7 +407,8 @@ main{position:relative;width:100%;overflow-x:clip}
 </head>
 <body>
 
-<canvas class="hero-bg" aria-hidden="true"></canvas>
+<div class="spot" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
 
 <header class="site-header">
   <nav>
@@ -765,40 +771,16 @@ document.querySelector(".theme-btn").addEventListener("click", ()=>{
   try { localStorage.setItem("theme", t); } catch(e) {}
 });
 
-/* page-wide contour lines — slow drift, they bend away from the cursor */
+/* spotlight trails the cursor */
 (function(){
-  const cv = document.querySelector(".hero-bg"); if (!cv || reduced) return;
-  const ctx = cv.getContext("2d");
-  let W, H, dpr, tx = -1e4, ty = -1e4, mx = -1e4, my = -1e4;
-  const GAP = 34, STEP = 14, R = 220;
-  function size(){
-    dpr = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight;
-    cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
-  }
-  size(); addEventListener("resize", size);
+  const el = document.querySelector(".spot"); if (!el || reduced || !matchMedia("(hover:hover)").matches) return;
+  let tx = innerWidth*.7, ty = innerHeight*.3, x = tx, y = ty;
   addEventListener("pointermove", e => { tx = e.clientX; ty = e.clientY; }, { passive: true });
-  document.addEventListener("pointerleave", () => { tx = ty = -1e4; });
-  function draw(now){
-    const t = now / 9000;
-    mx += (tx - mx) * 0.08; my += (ty - my) * 0.08;
-    if (tx < -9e3) { mx = tx; my = ty; }
-    ctx.clearRect(0,0,W,H);
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = isDark() ? "rgba(241,243,244,0.075)" : "rgba(31,31,31,0.085)";
-    for (let y0 = -GAP; y0 < H + GAP; y0 += GAP){
-      ctx.beginPath();
-      for (let x = -STEP; x <= W + STEP; x += STEP){
-        let y = y0 + Math.sin(x * 0.0042 + y0 * 0.011 + t) * 14
-                   + Math.sin(x * 0.0017 - y0 * 0.006 - t * 1.4) * 22;
-        const dx = x - mx, dy = y - my, d2 = dx*dx + dy*dy;
-        if (d2 < R*R * 4) y += dy / (Math.abs(dy) + 60) * 40 * Math.exp(-d2 / (R*R));   // part around the cursor
-        x === -STEP ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-    }
-    requestAnimationFrame(draw);
-  }
-  requestAnimationFrame(draw);
+  (function loop(){
+    x += (tx - x) * .07; y += (ty - y) * .07;
+    el.style.setProperty("--sx", x + "px"); el.style.setProperty("--sy", y + "px");
+    requestAnimationFrame(loop);
+  })();
 })();
 
 /* hero sequence */
