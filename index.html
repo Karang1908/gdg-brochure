@@ -59,8 +59,8 @@ body,.site-header,.marquee,.mobile-menu{transition:background-color .4s ease,col
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .theme-btn .sun{display:none}:root:not([data-theme="light"]) .theme-btn .moon{display:block}}
 .nav-right{display:flex;align-items:center;gap:1.5rem}
 @media (min-width:768px){.nav-right{gap:2.5rem}}
-/* page background: film grain + a soft light that follows the cursor */
-.spot{position:fixed;inset:0;z-index:0;pointer-events:none;--sx:70vw;--sy:30vh;background:radial-gradient(38rem 38rem at var(--sx) var(--sy),var(--spot),transparent 70%)}
+/* page background: comic-print halftone (Ben-Day dots) + paper grain */
+.halftone{position:fixed;inset:0;z-index:0;width:100%;height:100%;pointer-events:none}
 :root{--spot:rgba(255,255,255,.85);--grain-o:.08}
 :root[data-theme="dark"]{--spot:rgba(255,255,255,.075);--grain-o:.06}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--spot:rgba(255,255,255,.075);--grain-o:.06}}
@@ -407,7 +407,7 @@ main{position:relative;width:100%;overflow-x:clip}
 </head>
 <body>
 
-<div class="spot" aria-hidden="true"></div>
+<canvas class="halftone" aria-hidden="true"></canvas>
 <div class="grain" aria-hidden="true"></div>
 
 <header class="site-header">
@@ -771,14 +771,39 @@ document.querySelector(".theme-btn").addEventListener("click", ()=>{
   try { localStorage.setItem("theme", t); } catch(e) {}
 });
 
-/* spotlight trails the cursor */
+/* halftone: dots swell toward the corners like comic shading, and around the cursor */
 (function(){
-  const el = document.querySelector(".spot"); if (!el || reduced || !matchMedia("(hover:hover)").matches) return;
-  let tx = innerWidth*.7, ty = innerHeight*.3, x = tx, y = ty;
-  addEventListener("pointermove", e => { tx = e.clientX; ty = e.clientY; }, { passive: true });
+  const cv = document.querySelector(".halftone"); if (!cv) return;
+  const ctx = cv.getContext("2d");
+  const GAP = 14, ANG = Math.PI / 4, CR = 260;
+  let W, H, dpr, tx = -1e4, ty = -1e4, mx = -1e4, my = -1e4, dirty = true;
+  function size(){
+    dpr = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight;
+    cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); dirty = true;
+  }
+  const blob = (x, y, cx, cy, r) => { const d = Math.hypot(x - cx, y - cy) / r; return d < 1 ? 1 - d : 0; };
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = isDark() ? "rgba(241,243,244,0.13)" : "rgba(31,31,31,0.17)";
+    const big = Math.max(W, H), c = Math.cos(ANG), s = Math.sin(ANG), maxR = GAP * .46;
+    ctx.beginPath();
+    for (let v = -big; v < big * 1.5; v += GAP) for (let u = -big; u < big * 1.5; u += GAP){
+      const x = u * c - v * s + W / 2, y = u * s + v * c;           // 45° screen, like print
+      if (x < -GAP || x > W + GAP || y < -GAP || y > H + GAP) continue;
+      let f = Math.max(blob(x, y, W, 0, big * .62), blob(x, y, 0, H, big * .5));
+      f = Math.max(f * f, blob(x, y, mx, my, CR) * .7);
+      const r = maxR * f; if (r < .45) continue;
+      ctx.moveTo(x + r, y); ctx.arc(x, y, r, 0, 6.2832);
+    }
+    ctx.fill();
+  }
+  size(); addEventListener("resize", size);
+  new MutationObserver(() => dirty = true).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  if (!reduced && matchMedia("(hover:hover)").matches)
+    addEventListener("pointermove", e => { tx = e.clientX; ty = e.clientY; }, { passive: true });
   (function loop(){
-    x += (tx - x) * .07; y += (ty - y) * .07;
-    el.style.setProperty("--sx", x + "px"); el.style.setProperty("--sy", y + "px");
+    if (Math.abs(tx - mx) + Math.abs(ty - my) > .5){ mx += (tx - mx) * .12; my += (ty - my) * .12; dirty = true; }
+    if (dirty){ draw(); dirty = false; }
     requestAnimationFrame(loop);
   })();
 })();
