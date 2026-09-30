@@ -200,6 +200,8 @@ main>section,main>footer,main>.slabs{position:relative;z-index:1}
 .pill-link{display:inline-flex;align-items:center;gap:.4em;padding:.45rem .9rem;border:2px solid var(--ink);border-radius:9999px;font-size:.875rem;font-weight:600;color:var(--ink);background:var(--yellow);text-decoration:none;transition:transform 200ms var(--expo)}
 .pill-link.alt{background:var(--blue)}
 .pill-link:hover{transform:translateY(-2px)}
+.brochure-btn{align-self:flex-start;display:inline-flex;align-items:center;gap:.5em;padding:.8rem 1.5rem;border:2px solid var(--ink);border-radius:9999px;font-size:1.0625rem;font-weight:700;color:var(--paper);background:var(--ink);text-decoration:none;box-shadow:4px 4px 0 var(--green);transition:transform 200ms var(--expo),box-shadow 200ms var(--expo)}
+.brochure-btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--green)}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media (min-width:1024px){.hero-deco{display:block}}
 .scroll-cue{position:absolute;bottom:2rem;left:var(--gutter);z-index:30;display:flex;align-items:center;gap:.75rem;font-size:.8125rem;font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:var(--ink)}
@@ -560,6 +562,7 @@ main>section,main>footer,main>.slabs{position:relative;z-index:1}
       </div>
     </div>
     <div class="hero-about fade-up" id="hero-about">
+      <a class="brochure-btn" href="assets/GDG-Hackathon-26-Brochure.pdf" target="_blank" rel="noopener">See Brochure <span aria-hidden="true">→</span></a>
       <p class="hero-about-t"><b>About us.</b> GDG on Campus BITS Pilani Dubai is a student-run community for builders, learners and future engineers.</p>
       <div class="hero-about-links">
         <a class="pill-link" href="https://gdg.community.dev/gdg-on-campus-bits-pilani-dubai-united-arab-emirates/" target="_blank" rel="noopener">Google Community <span aria-hidden="true">↗</span></a>
