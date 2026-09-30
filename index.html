@@ -4,7 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GDG Hackathon ’26 — Sponsorship</title>
-<meta name="description" content="GDG on Campus BITS Pilani, Dubai Campus — BitNBuild ’26 hackathon sponsorship.">
+<meta name="description" content="GDG on Campus BITS Pilani, Dubai Campus — GDG Hackathon ’26 sponsorship.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sponsor.gdgocbpdc.tech/">
+<meta property="og:title" content="GDG Hackathon ’26 — Sponsorship">
+<meta property="og:description" content="GDG on Campus BITS Pilani, Dubai Campus — GDG Hackathon ’26 sponsorship.">
+<meta property="og:image" content="https://sponsor.gdgocbpdc.tech/assets/favicon.png">
+<meta name="twitter:card" content="summary">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,7 +56,7 @@ body{background:var(--background);color:var(--foreground);font-family:var(--font
 :root[data-theme="dark"] .dark{--background:#0C2018;--surface:#12301F;border-top:1px solid rgba(243,237,226,.08);box-shadow:inset 0 3px 0 0 transparent}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dark{--background:#0C2018;--surface:#12301F;border-top:1px solid rgba(243,237,226,.08)}}
 /* brand-coloured fills always keep dark text on light */
-.hero-meta,.p-num,.hero-roles .line:nth-child(3) .in{--ink:#1B1814;--paper:#F3EDE2;--muted:#4A4238;--line:rgba(27,24,20,0.14)}
+.hero-meta,.pill-link,.p-num,.hero-roles .line:nth-child(3) .in{--ink:#1B1814;--paper:#F3EDE2;--muted:#4A4238;--line:rgba(27,24,20,0.14)}
 .inc .p-num{border-color:#F3EDE2}
 body,.site-header,.marquee,.mobile-menu{transition:background-color .4s ease,color .4s ease}
 .theme-btn{position:relative;width:2.5rem;height:2.5rem;border-radius:9999px;border:1.5px solid var(--line-strong);display:grid;place-items:center;color:var(--ink);transition:transform .5s var(--expo),border-color .3s}
@@ -435,7 +441,7 @@ main>section,main>footer,main>.slabs{position:relative;z-index:1}
 .phone a{transition:color 340ms ease-out}
 .phone a:hover{color:var(--yellow)}
 .phone span{font-size:1rem;font-weight:500;letter-spacing:0;color:var(--muted)}
-@media (max-width:639px){#top{display:flex;flex-direction:column}.hero-bottom{order:-1;padding-top:6.5rem}.hero-top{padding-top:1.75rem;gap:1.5rem}.hero-name{font-size:3.1rem}.email{font-size:1.2rem;white-space:nowrap;word-break:normal}}
+@media (max-width:639px){#top{display:flex;flex-direction:column}.hero-bottom{order:-1;padding-top:6.5rem}.hero-about{order:-1}.hero-top{padding-top:1.75rem;gap:1.5rem}.hero-name{font-size:3.1rem}.email{font-size:1.2rem;white-space:nowrap;word-break:normal}}
 @media (min-width:640px){.email{gap:1rem;font-size:2.25rem;line-height:1.1}}
 .prices{margin-top:4rem;padding-top:2.5rem;border-top:2px solid var(--line-strong);display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gutter);max-width:62rem}
 .prices .label{color:var(--c)}
@@ -558,7 +564,7 @@ main>section,main>footer,main>.slabs{position:relative;z-index:1}
         <svg class="globe" viewBox="0 0 100 100" fill="none" stroke="#1B1814" stroke-width="1.6"><circle cx="50" cy="50" r="46" fill="#FBBC05"/><ellipse cx="50" cy="50" rx="18" ry="46"/><path d="M4 50h92M9 30h82M9 70h82"/></svg>
       </div>
     </div>
-    <div class="hero-about fade-up">
+    <div class="hero-about fade-up" id="hero-about">
       <p class="hero-about-t"><b>About us.</b> GDG on Campus BITS Pilani Dubai is a student-run community for builders, learners and future engineers.</p>
       <div class="hero-about-links">
         <a class="pill-link" href="https://gdg.community.dev/gdg-on-campus-bits-pilani-dubai-united-arab-emirates/" target="_blank" rel="noopener">Google Community <span aria-hidden="true">↗</span></a>
@@ -1007,6 +1013,7 @@ const at = (ms, fn) => setTimeout(fn, reduced ? 0 : ms);
 at(150, ()=> document.getElementById("hero-name").classList.add("revealed"));
 at(350, ()=> document.getElementById("roles").classList.add("revealed"));
 at(550, ()=> document.getElementById("hero-desc").classList.add("revealed"));
+at(800, ()=> document.getElementById("hero-about").classList.add("revealed"));
 at(1050, ()=> document.getElementById("scroll-cue").classList.add("revealed"));
 </script>
 </body>
