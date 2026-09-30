@@ -233,7 +233,7 @@ main{position:relative;width:100%;overflow-x:clip}
 .arches svg{width:18rem;color:var(--paper)}
 
 /* tier slabs (brochure pp.5-8) */
-.slab{--ink-s:#1F1F1F;position:relative;background:var(--c);color:var(--ink-s);padding:5rem var(--gutter);border-top:2px solid var(--ink-s);overflow:hidden}
+.slab{--ink-s:#1F1F1F;position:relative;background:linear-gradient(135deg,var(--hi) 0%,var(--c) 42%,var(--lo) 100%);color:var(--ink-s);padding:5rem var(--gutter);border-top:2px solid var(--ink-s);overflow:hidden}
 .slab:last-child{border-bottom:2px solid var(--ink-s)}
 .slab-grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:start}
 @media (min-width:1024px){.slab-grid{grid-template-columns:5fr 7fr;gap:var(--gutter)}}
@@ -244,14 +244,14 @@ main{position:relative;width:100%;overflow-x:clip}
 .slab-price{margin-top:1.5rem;display:inline-block;padding:.5rem 1.1rem .6rem;border-radius:.9rem;background:var(--ink-s);color:var(--c);font-size:2.75rem;font-weight:800;line-height:1;letter-spacing:-0.04em}
 .slab-pack{margin-top:2rem;padding-top:1.5rem;border-top:2px solid var(--ink-s);display:flex;flex-wrap:wrap;gap:.6rem}
 .slab-pack span{display:inline-flex;align-items:center;gap:.55rem;padding:.4rem .9rem .4rem .4rem;border:2px solid var(--ink-s);border-radius:9999px;background:rgba(255,255,255,.35);font-weight:700;font-size:.875rem;text-transform:uppercase;letter-spacing:.1em}
-.slab-pack span:nth-child(1) i{background:#4285F4}.slab-pack span:nth-child(2) i{background:#EA4335}.slab-pack span:nth-child(3) i{background:#34A853}
+.slab-pack i{background:linear-gradient(135deg,var(--hi),var(--c))}
 .slab-pack i{display:grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:50%;border:2px solid var(--ink-s);color:var(--ink-s);font-weight:800;font-style:normal;font-size:1rem;letter-spacing:0}
 .slab-card{background:#F4F4F2;color:var(--ink-s);border:2px solid var(--ink-s);border-radius:1.25rem;padding:.5rem 2rem;box-shadow:.5rem .5rem 0 0 var(--ink-s)}
 .slab-card li{display:grid;grid-template-columns:3.25rem 1fr;align-items:start;padding:1.25rem .75rem;margin:0 -.75rem;border-bottom:1.5px solid rgba(31,31,31,.14);border-radius:.75rem;transition:background-color .3s}
 .slab-card li:hover{background:color-mix(in srgb,var(--c) 22%,transparent)}
 .slab-card li:last-child{border-bottom:0}
 .slab-card b{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:50%;border:2px solid var(--ink-s);background:var(--bc);font-size:.8125rem;font-weight:800;letter-spacing:.04em}
-.slab-card li:nth-child(4n+1){--bc:#4285F4}.slab-card li:nth-child(4n+2){--bc:#EA4335}.slab-card li:nth-child(4n+3){--bc:#FBBC05}.slab-card li:nth-child(4n+4){--bc:#34A853}
+.slab-card li{--bc:linear-gradient(135deg,var(--hi),var(--c))}
 .slab-card h4{padding-top:.15rem;font-size:1.3125rem;font-weight:800;letter-spacing:-0.02em}
 .slab-card p{margin-top:.3rem;font-size:1rem;line-height:1.5;color:#3C4043}
 .slab-note{margin-top:1.25rem;padding:1.1rem 1.5rem;border-radius:.9rem;border:2px solid var(--ink-s);background:var(--ink-s);color:#F4F4F2;font-weight:700;font-size:1.125rem}
@@ -667,7 +667,7 @@ shots.forEach(([src,n,b,t,c],i)=>{
 
 /* tier detail */
 const tiers = [
-  { name:"Gold", price:"AED 5,000", c:"#FBBC05", ct:"var(--yellow-t)",
+  { name:"Gold", price:"AED 5,000", c:"#E9BE4F", hi:"#FFF0B8", lo:"#B8860B", ct:"#9A6B12",
     line:"Own the event.",
     pack:[["4","Stories"],["2","Reels"],["1","Post"]],
     items:[["bulb","Your problem statement","Give your problem statement for the hackathon."],
@@ -676,7 +676,7 @@ const tiers = [
            ["flag","Full brand package","Logo on all posters, banners and merch, plus social and partner promotion."],
            ["play","Video, emails & prizes","Promo video at the event, participant emails, and optional prizes."]],
     note:["Main title sponsor","“GDG Hackathon ’26 powered by [Company Name]”"] },
-  { name:"Silver", price:"AED 3,000", c:"#4285F4", ct:"var(--blue-t)",
+  { name:"Silver", price:"AED 3,000", c:"#C3CAD4", hi:"#F7F9FC", lo:"#8A94A3", ct:"#5F6875",
     line:"Be seen everywhere.",
     pack:[["2","Stories"],["1","Reel"],["1","Post"]],
     items:[["eye","Logo visibility","Logo on posters and banners, plus social media mentions."],
@@ -684,7 +684,7 @@ const tiers = [
            ["gift","Branded distribution","Distribute branded vouchers or merchandise."],
            ["star","Silver Sponsor acknowledgment","Recognition in event promotions."]],
     note:["Co-title sponsor","Second title recognition, alongside the Gold main title"] },
-  { name:"Bronze", price:"AED 1,500", c:"#34A853", ct:"var(--green-t)",
+  { name:"Bronze", price:"AED 1,500", c:"#CD8A55", hi:"#F5CFAE", lo:"#8E5328", ct:"#8E5328",
     line:"Get on the board.",
     pack:[["1","Story"],["1","Post"]],
     items:[["image","Logo presence","Logo displayed on event banners and digital posters."],
@@ -707,10 +707,10 @@ const IC = {
   check:'<circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/>'
 };
 const slabsEl = document.getElementById("slabs");
-const NOTE_C = ["#FBBC05","#FBBC05","#34A853"], SHADOW_C = ["#EA4335","#FBBC05","#4285F4"];
+const NOTE_C = ["#F2C14E","#D5DBE3","#E3A574"], SHADOW_C = ["#8A6210","#6F7885","#6E3D1B"];
 tiers.forEach((t,i)=>{
   const el = document.createElement("article");
-  el.className = "slab"; el.style.setProperty("--c", t.c); el.style.setProperty("--sh", SHADOW_C[i]); el.id = "tier-" + t.name.toLowerCase();
+  el.className = "slab"; el.style.setProperty("--c", t.c); el.style.setProperty("--sh", SHADOW_C[i]); el.style.setProperty("--hi", t.hi); el.style.setProperty("--lo", t.lo); el.id = "tier-" + t.name.toLowerCase();
   el.innerHTML = `<div class="slab-grid">
     <div class="fade-up io" style="--y:30px;--d:700ms">
       <p class="slab-k">${t.name} tier · 0${i+1}</p>
