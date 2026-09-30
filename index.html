@@ -373,7 +373,7 @@ main>section,main>footer,main>.slabs{position:relative;z-index:1}
 @media (max-width:640px){.table{font-size:1rem}.table th,.table td{padding:1rem .6rem}.table th{font-size:.75rem}.table td:not(:first-child){font-size:1.5rem}}
 
 /* contact */
-#contact{padding-top:5rem;padding-inline:var(--gutter);position:relative;overflow:hidden}
+#contact{padding-top:5rem;padding-bottom:5.5rem;padding-inline:var(--gutter);position:relative;overflow:hidden}
 .c-h{margin-top:1.5rem;max-width:18ch;font-family:var(--font-display);line-height:.92;letter-spacing:-0.045em;font-size:3rem;font-weight:800}
 @media (min-width:640px){.c-h{font-size:4.5rem}}
 .c-grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:end}
@@ -727,17 +727,17 @@ lenis.on("scroll", ({ scroll }) => header.classList.toggle("scrolled", scroll > 
     }
 
     /* underground lake: soft rounded mounds, a still pool and slow shimmer */
-    const lake = H - Math.min(170, H * .04 + 120);
+    /* water starts just below the last line of footer text, whatever the screen size */
+    const texts = [...document.querySelectorAll("#contact p, #contact a, #contact li, #contact dd")];
+    const mTop = main.getBoundingClientRect().top;
+    const textEnd = Math.max(...texts.map(e => e.getBoundingClientRect().bottom - mTop));
+    const lake = Math.min(H - 40, Math.max(textEnd + 28, H - 170));
     for (const [fill, op, hmax, off] of [["var(--wall)", .8, 120, -30], ["#050A12", .8, 60, 0]]){
       const pts = [[-40, lake + off]];
       for (let x = -40; x < W + 80; ){ const w = rnd(160, 320); pts.push([x + w * .5, lake + off - rnd(hmax * .3, hmax)], [x + w, lake + off - rnd(0, 12)]); x += w; }
       o += `<path d="${smooth(pts)} L${W + 80} ${H} L-40 ${H} Z" style="fill:${fill}" opacity="${op}"/>`;
     }
-    o += `<rect x="0" y="${lake}" width="${W}" height="${H - lake}" fill="#3FC7D6" opacity=".08"/>`;
-    for (let i = 0; i < 22; i++){
-      const y = rnd(lake + 14, H - 10), x = rnd(0, W - 60);
-      o += `<rect class="w-shim" x="${x.toFixed(0)}" y="${y.toFixed(0)}" width="${rnd(20, 70).toFixed(0)}" height="1.5" rx=".75" fill="#9FF3F0" style="--d:${rnd(4,8).toFixed(1)}s;--dl:${rnd(-8,0).toFixed(1)}s"/>`;
-    }
+    o += `<rect x="0" y="${lake}" width="${W}" height="${H - lake}" fill="#3FC7D6" opacity=".12"/>`;
     world.style.height = H + "px";
     world.innerHTML = o + "</svg>";
   }
