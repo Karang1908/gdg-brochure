@@ -59,17 +59,7 @@ body,.site-header,.marquee,.mobile-menu{transition:background-color .4s ease,col
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .theme-btn .sun{display:none}:root:not([data-theme="light"]) .theme-btn .moon{display:block}}
 .nav-right{display:flex;align-items:center;gap:1.5rem}
 @media (min-width:768px){.nav-right{gap:2.5rem}}
-/* hero background: slow aurora glows under an interactive dot grid */
-.aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;opacity:var(--aurora-o,.28)}
-:root[data-theme="dark"] .aurora{display:none}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .aurora{display:none}}
-.aurora i{position:absolute;width:44vw;aspect-ratio:1;border-radius:50%;filter:blur(90px);opacity:.5;animation:drift 26s ease-in-out infinite alternate}
-.aurora i:nth-child(1){background:var(--blue);left:-10vw;top:-12vw}
-.aurora i:nth-child(2){background:var(--red);right:-8vw;top:-6vw;width:34vw;animation-duration:31s;animation-delay:-6s}
-.aurora i:nth-child(3){background:var(--yellow);right:8vw;bottom:-18vw;width:38vw;animation-duration:29s;animation-delay:-12s}
-.aurora i:nth-child(4){background:var(--green);left:18vw;bottom:-22vw;width:36vw;animation-duration:34s;animation-delay:-18s}
-@keyframes drift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(6vw,4vw) scale(1.12)}100%{transform:translate(-4vw,7vw) scale(.94)}}
-/* hero background: interactive dot grid */
+/* page background: slow monochrome contour lines */
 .hero-bg{position:fixed;inset:0;z-index:0;width:100%;height:100%;pointer-events:none}
 main{z-index:1}
 .dark{--background:#1F1F1F;--foreground:#F0F0F0;--surface:#2A2A2A;--surface-2:#333;--muted:#A8A8A8;--line:rgba(240,240,240,0.14);--line-strong:rgba(240,240,240,0.8);background:var(--background);color:var(--foreground)}
@@ -404,7 +394,6 @@ main{position:relative;width:100%;overflow-x:clip}
 
 @media (prefers-reduced-motion:reduce){
   .hero-bg{display:none}
-  .aurora i{animation:none!important}
   .marquee-track,.bob,.hero-deco svg{animation:none!important}
   .hero-mark{opacity:1!important;transform:none!important}
   .line>.in,.ltr,.fade-up,.vp-wrap,.quote .w,.benefits li{transition:none!important;animation:none!important;opacity:1!important;transform:none!important}
@@ -413,7 +402,6 @@ main{position:relative;width:100%;overflow-x:clip}
 </head>
 <body>
 
-<div class="aurora" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 <canvas class="hero-bg" aria-hidden="true"></canvas>
 
 <header class="site-header">
@@ -777,38 +765,37 @@ document.querySelector(".theme-btn").addEventListener("click", ()=>{
   try { localStorage.setItem("theme", t); } catch(e) {}
 });
 
-/* page-wide dot grid — dots swell and take Google colours near the cursor */
+/* page-wide contour lines — slow drift, they bend away from the cursor */
 (function(){
   const cv = document.querySelector(".hero-bg"); if (!cv || reduced) return;
   const ctx = cv.getContext("2d");
-  let W, H, dpr, dots = [], on = true, mx = -999, my = -999, tx = -999, ty = -999;
-  const GAP = 30, R = 170;
+  let W, H, dpr, tx = -1e4, ty = -1e4, mx = -1e4, my = -1e4;
+  const GAP = 34, STEP = 14, R = 220;
   function size(){
     dpr = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight;
     cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
-    dots = [];
-    for (let y = GAP/2; y < H; y += GAP) for (let x = GAP/2; x < W; x += GAP)
-      dots.push([x, y, G[(Math.floor(x/GAP*0.37 + y/GAP*0.61)) & 3]]);
   }
   size(); addEventListener("resize", size);
   addEventListener("pointermove", e => { tx = e.clientX; ty = e.clientY; }, { passive: true });
-  document.addEventListener("pointerleave", () => { tx = ty = -999; });
-  function draw(t){
-    if (!on) return;
-    mx += (tx - mx) * 0.12; my += (ty - my) * 0.12;
-    if (tx < -900) { mx = tx; my = ty; }
+  document.addEventListener("pointerleave", () => { tx = ty = -1e4; });
+  function draw(now){
+    const t = now / 9000;
+    mx += (tx - mx) * 0.08; my += (ty - my) * 0.08;
+    if (tx < -9e3) { mx = tx; my = ty; }
     ctx.clearRect(0,0,W,H);
-    const dk = isDark(), base = dk ? "rgba(241,243,244,0.07)" : "rgba(31,31,31,0.09)";
-    for (const [x,y,c] of dots){
-      const d = Math.hypot(x - mx, y - my);
-      const near = d < R ? 1 - d/R : 0;
-      const k = near * near;
-      ctx.beginPath(); ctx.arc(x, y, 1 + k * 1.8, 0, 6.2832);
-      if (k > 0.04){ ctx.fillStyle = c; ctx.globalAlpha = (dk ? 0.25 : 0.15) + k * (dk ? 0.6 : 0.45); }
-      else { ctx.fillStyle = base; ctx.globalAlpha = 1; }
-      ctx.fill();
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = isDark() ? "rgba(241,243,244,0.075)" : "rgba(31,31,31,0.085)";
+    for (let y0 = -GAP; y0 < H + GAP; y0 += GAP){
+      ctx.beginPath();
+      for (let x = -STEP; x <= W + STEP; x += STEP){
+        let y = y0 + Math.sin(x * 0.0042 + y0 * 0.011 + t) * 14
+                   + Math.sin(x * 0.0017 - y0 * 0.006 - t * 1.4) * 22;
+        const dx = x - mx, dy = y - my, d2 = dx*dx + dy*dy;
+        if (d2 < R*R * 4) y += dy / (Math.abs(dy) + 60) * 40 * Math.exp(-d2 / (R*R));   // part around the cursor
+        x === -STEP ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
     }
-    ctx.globalAlpha = 1;
     requestAnimationFrame(draw);
   }
   requestAnimationFrame(draw);
