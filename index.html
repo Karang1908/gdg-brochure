@@ -277,6 +277,22 @@ main>section,main>footer,main>.slabs{position:relative;z-index:1}
 .slab-note em{display:block;margin-bottom:.35rem;font-style:normal;font-size:.75rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--nc)}
 .slab-art{position:absolute;right:-3rem;bottom:-3rem;width:16rem;opacity:.9;pointer-events:none}
 @media (max-width:1023px){.slab-art{display:none}}
+/* diamond tier: faceted crystal card with a slow light sweep */
+#tier-diamond .slab-card{position:relative;overflow:hidden;isolation:isolate;background:linear-gradient(135deg,rgba(255,255,255,.95) 0 16%,transparent 16.2%),linear-gradient(225deg,rgba(170,222,242,.55) 0 21%,transparent 21.2%),linear-gradient(315deg,rgba(110,170,205,.32) 0 19%,transparent 19.2%),linear-gradient(45deg,rgba(255,255,255,.55) 0 13%,transparent 13.2%),linear-gradient(115deg,transparent 0 46%,rgba(255,255,255,.55) 46% 54%,transparent 54.2%),linear-gradient(160deg,#F8FEFF,#DCF1F9 55%,#BEE2F0)}
+#tier-diamond .slab-card::after{content:"";position:absolute;inset:-20% -60%;z-index:-1;background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.75) 50%,transparent 58%);transform:translateX(-60%);animation:gemSweep 6s ease-in-out infinite}
+@keyframes gemSweep{0%,55%{transform:translateX(-60%)}85%,100%{transform:translateX(60%)}}
+#tier-diamond .slab-card li{border-bottom-color:rgba(60,120,150,.22)}
+#tier-diamond .slab-card li:hover{background:rgba(255,255,255,.5)}
+#tier-diamond .slab-card b{background:linear-gradient(135deg,#FFFFFF,#9FD6EA)}
+:root[data-theme="dark"] #tier-diamond .slab-card{background:linear-gradient(135deg,rgba(191,230,242,.16) 0 16%,transparent 16.2%),linear-gradient(225deg,rgba(191,230,242,.09) 0 21%,transparent 21.2%),linear-gradient(315deg,rgba(125,180,210,.12) 0 19%,transparent 19.2%),linear-gradient(45deg,rgba(255,255,255,.05) 0 13%,transparent 13.2%),linear-gradient(115deg,transparent 0 46%,rgba(255,255,255,.05) 46% 54%,transparent 54.2%),linear-gradient(160deg,#12303A,#0B1F26 60%,#0A1A20);border-color:rgba(191,230,242,.35)}
+:root[data-theme="dark"] #tier-diamond .slab-card::after{background:linear-gradient(105deg,transparent 42%,rgba(191,230,242,.22) 50%,transparent 58%)}
+:root[data-theme="dark"] #tier-diamond .slab-card li:hover{background:rgba(191,230,242,.08)}
+@media (prefers-color-scheme:dark){
+:root:not([data-theme="light"]) #tier-diamond .slab-card{background:linear-gradient(135deg,rgba(191,230,242,.16) 0 16%,transparent 16.2%),linear-gradient(225deg,rgba(191,230,242,.09) 0 21%,transparent 21.2%),linear-gradient(315deg,rgba(125,180,210,.12) 0 19%,transparent 19.2%),linear-gradient(45deg,rgba(255,255,255,.05) 0 13%,transparent 13.2%),linear-gradient(115deg,transparent 0 46%,rgba(255,255,255,.05) 46% 54%,transparent 54.2%),linear-gradient(160deg,#12303A,#0B1F26 60%,#0A1A20);border-color:rgba(191,230,242,.35)}
+:root:not([data-theme="light"]) #tier-diamond .slab-card::after{background:linear-gradient(105deg,transparent 42%,rgba(191,230,242,.22) 50%,transparent 58%)}
+:root:not([data-theme="light"]) #tier-diamond .slab-card li:hover{background:rgba(191,230,242,.08)}
+}
+@media (prefers-reduced-motion:reduce){#tier-diamond .slab-card::after{animation:none;opacity:0}}
 /* tier slabs — dark variant: dark panels, tier colour as accent */
 :root[data-theme="dark"] .slab{--ink-s:#F3EDE2;background:#07120F;color:#F3EDE2;border-top:1px solid rgba(243,237,226,.08)}
 :root[data-theme="dark"] .slab:last-child{border-bottom:1px solid rgba(243,237,226,.08)}
